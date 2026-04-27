@@ -239,6 +239,24 @@ const TASK_GROUPS = [
     ],
   },
   {
+    id: 'theme',
+    group: 'Theme',
+    color: '#94A3B8',
+    concept: 'Dark / Light Toggle · CSS Variables · localStorage',
+    tasks: [
+      {
+        id: 'theme-toggle',
+        title: 'Theme Toggle',
+        description:
+          'Add dark/light theme switching to the app. Persist the chosen theme across page refreshes.',
+        file: 'src/features/theme/components/theme-toggle.jsx',
+        testFile: null,
+        difficulty: 'hard',
+        refs: [],
+      },
+    ],
+  },
+  {
     id: 'loading',
     group: 'Loading States',
     color: '#34D399',
