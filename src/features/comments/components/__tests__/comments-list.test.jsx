@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 import { CommentsList } from '../comments-list'
 
 const mockComments = [
@@ -8,7 +8,7 @@ const mockComments = [
   { id: 'c-3', body: 'Third comment', postId: 'post-1', userId: 'user-4', createdAt: '2024-01-15T13:00:00.000Z' },
 ]
 
-describe('CommentsList', () => {
+describe('commentsList', () => {
   it('renders all comments', () => {
     render(<CommentsList comments={mockComments} />)
     expect(screen.getByText(/first comment/i)).toBeInTheDocument()

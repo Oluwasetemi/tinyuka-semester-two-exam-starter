@@ -1,12 +1,12 @@
-import { Suspense, useState } from 'react'
 import { useHead } from '@unhead/react'
+import { Suspense, useState } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import { ContentLayout } from '@/components/layouts/content-layout'
-import { PostsList } from '@/features/posts/components/posts-list'
-import { PostsListSkeleton } from '@/features/posts/components/posts-list-skeleton'
-import { PostsFilters } from '@/features/posts/components/posts-filters'
 import { ErrorFallback } from '@/components/ui/error-boundary/error-fallback'
 import { PostsProvider } from '@/context/posts-context'
+import { PostsFilters } from '@/features/posts/components/posts-filters'
+import { PostsList } from '@/features/posts/components/posts-list'
+import { PostsListSkeleton } from '@/features/posts/components/posts-list-skeleton'
 
 // PostsFilters and PostsProvider are student TODO implementations.
 // Once both are implemented, PostsProvider wraps the page and PostsFilters

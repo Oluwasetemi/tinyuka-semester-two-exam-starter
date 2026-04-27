@@ -16,10 +16,10 @@ async function fetchJSON(path, options = {}) {
 }
 
 export const apiClient = {
-  get: (path) => fetchJSON(path),
+  get: path => fetchJSON(path),
   post: (path, data) =>
     fetchJSON(path, { method: 'POST', body: JSON.stringify(data) }),
   patch: (path, data) =>
     fetchJSON(path, { method: 'PATCH', body: JSON.stringify(data) }),
-  delete: (path) => fetchJSON(path, { method: 'DELETE' }),
+  delete: path => fetchJSON(path, { method: 'DELETE' }),
 }

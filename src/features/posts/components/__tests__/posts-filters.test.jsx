@@ -1,20 +1,20 @@
-import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { PostsFilters } from '../posts-filters'
+import { describe, expect, it, vi } from 'vitest'
 import { PostsContext } from '@/context/posts-context'
+import { PostsFilters } from '../posts-filters'
 
 function renderWithContext(search = '', filter = 'all') {
   const dispatch = vi.fn()
   render(
-    <PostsContext.Provider value={{ search, filter, dispatch }}>
+    <PostsContext value={{ search, filter, dispatch }}>
       <PostsFilters />
-    </PostsContext.Provider>,
+    </PostsContext>,
   )
   return { dispatch }
 }
 
-describe('PostsFilters (context version)', () => {
+describe('postsFilters (context version)', () => {
   it('renders search input with current search value from context', () => {
     renderWithContext('react hooks')
     expect(screen.getByRole('searchbox')).toHaveValue('react hooks')

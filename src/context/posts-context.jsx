@@ -1,4 +1,4 @@
-import { createContext, useReducer } from 'react'
+import { createContext } from 'react'
 
 // TODO: Implement PostsContext and PostsProvider
 //

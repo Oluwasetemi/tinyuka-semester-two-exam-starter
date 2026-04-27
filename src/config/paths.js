@@ -9,7 +9,7 @@ export const paths = {
   },
   post: {
     path: '/posts/:id',
-    getHref: (id) => `/posts/${id}`,
+    getHref: id => `/posts/${id}`,
   },
   errorTest: {
     path: '/error-test',

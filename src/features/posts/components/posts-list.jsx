@@ -1,22 +1,23 @@
+import { notNullish } from '@setemiojo/utils'
 import { useSearchParams } from 'react-router'
+import { Pagination } from '@/components/ui/pagination'
 import { usePosts } from '../api/get-posts'
 import { PostCard } from './post-card'
-import { Pagination } from '@/components/ui/pagination'
 
 export function PostsList({ search, filter }) {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
 
   const { data } = usePosts({ page })
-  const posts = data?.data ?? []
+  const posts = (data?.data ?? []).filter(notNullish)
   const meta = data?.meta
 
   const filtered = posts.filter((post) => {
     const matchesSearch = search
       ? post.title.toLowerCase().includes(search.toLowerCase())
       : true
-    const matchesFilter =
-      filter === 'all' ? true : post.status === filter
+    const matchesFilter
+      = filter === 'all' ? true : post.status === filter
     return matchesSearch && matchesFilter
   })
 
@@ -31,7 +32,7 @@ export function PostsList({ search, filter }) {
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {filtered.map((post) => (
+        {filtered.map(post => (
           <PostCard key={post.id} post={post} />
         ))}
       </div>

@@ -1,6 +1,3 @@
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
-import { apiClient } from '@/lib/api-client'
-
 // TODO: Implement getCommentsQueryOptions and useComments
 //
 // getCommentsQueryOptions(postId) should return queryOptions({
@@ -12,7 +9,7 @@ import { apiClient } from '@/lib/api-client'
 //
 // Reference: src/features/posts/api/get-posts.js
 
-export const getCommentsQueryOptions = (postId) => {
+export function getCommentsQueryOptions(postId) {
   throw new Error('TODO: implement getCommentsQueryOptions in get-comments.js')
 }
 

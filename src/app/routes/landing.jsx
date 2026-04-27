@@ -1,18 +1,18 @@
 import { useHead } from '@unhead/react'
+import {
+  ArrowRight,
+  BookOpen,
+  Check,
+  CheckSquare,
+  Copy,
+  ExternalLink,
+  Square,
+  Terminal,
+  Zap,
+} from 'lucide-react'
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { paths } from '@/config/paths'
-import {
-  ExternalLink,
-  CheckSquare,
-  Square,
-  Copy,
-  Check,
-  ArrowRight,
-  Terminal,
-  BookOpen,
-  Zap,
-} from 'lucide-react'
 
 /* global __PROJECT_ROOT__ */
 const PROJECT_ROOT = __PROJECT_ROOT__
@@ -126,7 +126,7 @@ const TASK_GROUPS = [
         id: 'create-comment',
         title: 'useCreateComment Mutation',
         description:
-          "Implement useMutation that POSTs to /posts/:postId/comments. On success, call queryClient.invalidateQueries({ queryKey: ['comments', postId] }).",
+          'Implement useMutation that POSTs to /posts/:postId/comments. On success, call queryClient.invalidateQueries({ queryKey: [\'comments\', postId] }).',
         file: 'src/features/comments/api/create-comment.js',
         testFile: 'src/features/comments/api/__tests__/create-comment.test.js',
         difficulty: 'hard',
@@ -148,7 +148,7 @@ const TASK_GROUPS = [
         id: 'post-view',
         title: 'PostView Component',
         description:
-          "Render a post's title as an <h1>, body text, and formatted createdAt date. Use semantic HTML: wrap in <article>, date in <time dateTime={post.createdAt}>.",
+          'Render a post\'s title as an <h1>, body text, and formatted createdAt date. Use semantic HTML: wrap in <article>, date in <time dateTime={post.createdAt}>.',
         file: 'src/features/posts/components/post-view.jsx',
         testFile: 'src/features/posts/components/__tests__/post-view.test.jsx',
         difficulty: 'easy',
@@ -196,7 +196,7 @@ const TASK_GROUPS = [
         id: 'posts-context',
         title: 'PostsContext',
         description:
-          "Create PostsContext with createContext(null) and PostsProvider using useReducer. Handle SET_SEARCH and SET_FILTER actions. Provider value: { ...state, dispatch }.",
+          'Create PostsContext with createContext(null) and PostsProvider using useReducer. Handle SET_SEARCH and SET_FILTER actions. Provider value: { ...state, dispatch }.',
         file: 'src/context/posts-context.jsx',
         testFile: 'src/context/__tests__/posts-context.test.jsx',
         difficulty: 'hard',
@@ -307,7 +307,7 @@ const DIFFICULTY_STYLES = {
   hard: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
 }
 
-const ALL_TASKS = TASK_GROUPS.flatMap((g) => g.tasks)
+const ALL_TASKS = TASK_GROUPS.flatMap(g => g.tasks)
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
@@ -329,6 +329,7 @@ function FilePath({ file }) {
         {file}
       </code>
       <button
+        type="button"
         onClick={handleCopy}
         aria-label="Copy file path"
         className="p-1.5 rounded hover:bg-white/10 transition-colors text-white/30 hover:text-white/60 shrink-0"
@@ -370,15 +371,18 @@ function TaskCard({ task, done, onToggle, groupColor }) {
     >
       <div className="flex items-start gap-3">
         <button
+          type="button"
           onClick={() => onToggle(task.id)}
           aria-label={done ? 'Mark as incomplete' : 'Mark as complete'}
           className="mt-0.5 shrink-0 text-white/30 hover:text-white/60 transition-colors"
         >
-          {done ? (
-            <CheckSquare className="w-4 h-4 text-emerald-400" />
-          ) : (
-            <Square className="w-4 h-4" />
-          )}
+          {done
+            ? (
+                <CheckSquare className="w-4 h-4 text-emerald-400" />
+              )
+            : (
+                <Square className="w-4 h-4" />
+              )}
         </button>
 
         <div className="flex-1 min-w-0">
@@ -418,7 +422,7 @@ function TaskCard({ task, done, onToggle, groupColor }) {
           {/* Doc reference chips */}
           {task.refs?.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-2">
-              {task.refs.map((ref) => (
+              {task.refs.map(ref => (
                 <DocChip key={ref.url} label={ref.label} url={ref.url} />
               ))}
             </div>
@@ -442,7 +446,8 @@ export default function LandingRoute() {
   const [done, setDone] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('exam-done') || '{}')
-    } catch {
+    }
+    catch {
       return {}
     }
   })
@@ -455,7 +460,7 @@ export default function LandingRoute() {
     })
   }
 
-  const completedCount = ALL_TASKS.filter((t) => done[t.id]).length
+  const completedCount = ALL_TASKS.filter(t => done[t.id]).length
   const totalCount = ALL_TASKS.length
   const progressPct = Math.round((completedCount / totalCount) * 100)
 
@@ -490,9 +495,17 @@ export default function LandingRoute() {
         {/* Progress bar */}
         <div className="mb-2 flex items-center justify-between text-xs text-white/35">
           <span style={{ fontFamily: 'var(--font-mono)' }}>
-            {completedCount} / {totalCount} tasks marked done
+            {completedCount}
+            {' '}
+            /
+            {totalCount}
+            {' '}
+            tasks marked done
           </span>
-          <span style={{ fontFamily: 'var(--font-mono)' }}>{progressPct}%</span>
+          <span style={{ fontFamily: 'var(--font-mono)' }}>
+            {progressPct}
+            %
+          </span>
         </div>
         <div className="h-1.5 rounded-full bg-white/8 overflow-hidden">
           <div
@@ -528,7 +541,10 @@ export default function LandingRoute() {
             <div key={cmd} className="flex items-center gap-3">
               <span className="text-emerald-400 select-none">$</span>
               <span className="text-white/70">{cmd}</span>
-              <span className="text-white/25 ml-auto hidden sm:block"># {note}</span>
+              <span className="text-white/25 ml-auto hidden sm:block">
+                #
+                {note}
+              </span>
             </div>
           ))}
         </div>
@@ -543,7 +559,7 @@ export default function LandingRoute() {
           Key Resources
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {RESOURCES.map((r) => (
+          {RESOURCES.map(r => (
             <a
               key={r.url}
               href={r.url}
@@ -596,7 +612,10 @@ export default function LandingRoute() {
                 {method}
               </span>
               <span className="text-white/55 flex-1">{path}</span>
-              <span className="text-white/20 hidden sm:block text-[10px] truncate max-w-[180px]">→ {response}</span>
+              <span className="text-white/20 hidden sm:block text-[10px] truncate max-w-[180px]">
+                →
+                {response}
+              </span>
               <span className={`text-[10px] shrink-0 ${note === 'provided' ? 'text-white/20' : 'text-amber-400/60'}`}>
                 {note}
               </span>
@@ -616,7 +635,7 @@ export default function LandingRoute() {
 
       {/* ── Task Groups ── */}
       <div className="space-y-10">
-        {TASK_GROUPS.map((group) => (
+        {TASK_GROUPS.map(group => (
           <section key={group.id} aria-labelledby={`group-${group.id}`}>
             <div className="flex items-baseline gap-3 mb-4">
               <h2
@@ -634,7 +653,7 @@ export default function LandingRoute() {
               </p>
             </div>
             <div className="space-y-3">
-              {group.tasks.map((task) => (
+              {group.tasks.map(task => (
                 <TaskCard
                   key={task.id}
                   task={task}
@@ -653,7 +672,8 @@ export default function LandingRoute() {
         className="mt-16 pt-8 border-t border-white/8 text-center text-[11px] text-white/20"
         style={{ fontFamily: 'var(--font-mono)' }}
       >
-        AltSchool Africa · React Second Semester Exam ·{' '}
+        AltSchool Africa · React Second Semester Exam ·
+        {' '}
         <a
           href="https://api.oluwasetemi.dev/reference"
           target="_blank"

@@ -12,6 +12,7 @@ export function ErrorFallback({ error, resetErrorBoundary }) {
         {error?.message}
       </pre>
       <button
+        type="button"
         onClick={resetErrorBoundary}
         className="px-4 py-2 bg-white/10 hover:bg-white/20 rounded-md text-sm transition-colors"
       >

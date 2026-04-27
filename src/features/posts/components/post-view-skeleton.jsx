@@ -9,8 +9,6 @@
 // Import Skeleton from '@/components/ui/skeleton'
 // Use className props to control width and height (e.g. "h-8 w-3/4", "h-4 w-full")
 
-import { Skeleton } from '@/components/ui/skeleton'
-
 export function PostViewSkeleton() {
   throw new Error('TODO: implement PostViewSkeleton in post-view-skeleton.jsx')
 }
