@@ -9,6 +9,9 @@ async function fetchJSON(path, options = {}) {
     const message = await response.text().catch(() => response.statusText)
     throw new Error(`API Error ${response.status}: ${message}`)
   }
+  if (response.status === 204 || response.headers.get('content-length') === '0') {
+    return null
+  }
   return response.json()
 }
 
