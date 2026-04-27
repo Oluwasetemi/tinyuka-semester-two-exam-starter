@@ -9,7 +9,7 @@ export function ErrorFallback({ error, resetErrorBoundary }) {
         Something went wrong
       </h2>
       <pre className="text-sm text-white/50 mb-6 max-w-md overflow-auto">
-        {error.message}
+        {error?.message}
       </pre>
       <button
         onClick={resetErrorBoundary}
