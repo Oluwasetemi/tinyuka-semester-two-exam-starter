@@ -76,7 +76,7 @@ const TASK_GROUPS = [
         difficulty: 'medium',
         refs: [
           { label: 'useParams', url: 'https://reactrouter.com/api/hooks/useParams' },
-          { label: 'Class Notes: Routing', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Routing', url: 'https://react.oluwasetemi.dev/187' },
           { label: 'Bulletproof: Routes', url: 'https://github.com/alan2207/bulletproof-react/blob/master/docs/project-structure.md' },
         ],
       },
