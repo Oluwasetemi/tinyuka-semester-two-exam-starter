@@ -55,6 +55,13 @@ const RESOURCES = [
     badge: 'Styling',
     badgeColor: 'text-teal-400 bg-teal-400/10 border-teal-400/20',
   },
+  {
+    name: 'Starter Repo',
+    url: 'https://github.com/Oluwasetemi/tinyuka-semester-two-exam-starter',
+    desc: 'Fork or clone this repo to begin your exam',
+    badge: 'GitHub',
+    badgeColor: 'text-white/50 bg-white/5 border-white/15',
+  },
 ]
 
 // ─── Task groups with per-task doc references ────────────────────────────────
@@ -663,6 +670,15 @@ export default function LandingRoute() {
           className="hover:text-white/45 transition-colors"
         >
           Class Notes ↗
+        </a>
+        {' · '}
+        <a
+          href="https://github.com/Oluwasetemi/tinyuka-semester-two-exam-starter"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-white/45 transition-colors"
+        >
+          GitHub ↗
         </a>
       </footer>
     </div>
