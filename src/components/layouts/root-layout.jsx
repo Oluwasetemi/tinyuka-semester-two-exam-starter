@@ -30,14 +30,14 @@ export function RootLayout() {
             >
               Error Test
             </NavLink>
-            <NavLink
-              to={`/exam.html`}
-              className={({ isActive }) =>
-                isActive ? "text-white" : "hover:text-white transition-colors"
-              }
+            <a
+              href="/exam.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
             >
               Exam Doc
-            </NavLink>
+            </a>
           </div>
         </nav>
       </header>
