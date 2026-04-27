@@ -1,394 +1,753 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AltSchool Africa — React Semester 2 Examination</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <style>
-    /* ── Reset & Base ─────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://altschoolafrica.com/icons/favicon-16x16.png"
+    />
+    <title>AltSchool Africa — React Semester 2 Examination</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ── Reset & Base ─────────────────────────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    :root {
-      --black: #0c0c0e;
-      --white: #f0efe8;
-      --grey-1: #1a1a1d;
-      --grey-2: #2a2a2d;
-      --grey-3: #3a3a3d;
-      --grey-4: #6b6b70;
-      --grey-5: #9a9a9f;
-      --accent: #FF6B35;
-      --teal:   #4ECDC4;
-      --yellow: #FFE66D;
-      --purple: #A78BFA;
-      --pink:   #F472B6;
-      --green:  #34D399;
-      --slate:  #94A3B8;
-      --font: 'Inter', system-ui, sans-serif;
-      --mono: 'JetBrains Mono', 'Fira Code', monospace;
-    }
+      :root {
+        --black: #0c0c0e;
+        --white: #f0efe8;
+        --grey-1: #1a1a1d;
+        --grey-2: #2a2a2d;
+        --grey-3: #3a3a3d;
+        --grey-4: #6b6b70;
+        --grey-5: #9a9a9f;
+        --accent: #ff6b35;
+        --teal: #4ecdc4;
+        --yellow: #ffe66d;
+        --purple: #a78bfa;
+        --pink: #f472b6;
+        --green: #34d399;
+        --slate: #94a3b8;
+        --font: "Inter", system-ui, sans-serif;
+        --mono: "JetBrains Mono", "Fira Code", monospace;
+      }
 
-    html { font-size: 10pt; }
+      html {
+        font-size: 10pt;
+      }
 
-    body {
-      font-family: var(--font);
-      background: #fff;
-      color: #1a1a1d;
-      line-height: 1.6;
-    }
+      body {
+        font-family: var(--font);
+        background: #fff;
+        color: #1a1a1d;
+        line-height: 1.6;
+      }
 
-    /* ── Print setup ──────────────────────────────────────────────────── */
-    @page {
-      size: A4;
-      margin: 18mm 16mm 18mm 16mm;
-    }
-    @media print {
-      body { font-size: 9.5pt; }
-      .no-print { display: none !important; }
-      .page-break { page-break-before: always; }
-      .avoid-break { page-break-inside: avoid; }
-      a { color: inherit; text-decoration: none; }
-      a[href]::after { content: " (" attr(href) ")"; font-size: 7.5pt; color: #666; }
-      .no-href-print::after { content: none !important; }
-    }
+      /* ── Print setup ──────────────────────────────────────────────────── */
+      @page {
+        size: A4;
+        margin: 18mm 16mm 18mm 16mm;
+      }
+      @media print {
+        body {
+          font-size: 9.5pt;
+        }
+        .no-print {
+          display: none !important;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+        .avoid-break {
+          page-break-inside: avoid;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+        a[href]::after {
+          content: " (" attr(href) ")";
+          font-size: 7.5pt;
+          color: #666;
+        }
+        .no-href-print::after {
+          content: none !important;
+        }
+      }
 
-    /* ── Print button ─────────────────────────────────────────────────── */
-    .print-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: #1a1a1d; color: #f0efe8;
-      padding: 10px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 13px;
-    }
-    .print-bar span { opacity: 0.7; }
-    .print-btn {
-      background: #FF6B35; color: #fff; border: none; border-radius: 6px;
-      padding: 7px 18px; font-size: 13px; font-weight: 600;
-      cursor: pointer; letter-spacing: 0.02em;
-    }
-    .print-btn:hover { background: #e5602e; }
+      /* ── Print button ─────────────────────────────────────────────────── */
+      .print-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: #1a1a1d;
+        color: #f0efe8;
+        padding: 10px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+      }
+      .print-bar span {
+        opacity: 0.7;
+      }
+      .print-btn {
+        background: #ff6b35;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 7px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        letter-spacing: 0.02em;
+      }
+      .print-btn:hover {
+        background: #e5602e;
+      }
 
-    /* ── Layout ───────────────────────────────────────────────────────── */
-    .page { max-width: 800px; margin: 0 auto; padding: 60px 32px 80px; }
-    @media print { .page { padding: 0; max-width: none; } }
+      /* ── Layout ───────────────────────────────────────────────────────── */
+      .page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 60px 32px 80px;
+      }
+      @media print {
+        .page {
+          padding: 0;
+          max-width: none;
+        }
+      }
 
-    /* ── Cover ────────────────────────────────────────────────────────── */
-    .cover {
-      border-bottom: 3px solid #1a1a1d;
-      padding-bottom: 28px;
-      margin-bottom: 36px;
-    }
-    .cover-eyebrow {
-      font-size: 9pt; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #666;
-      margin-bottom: 12px;
-    }
-    .cover-title {
-      font-size: 28pt; font-weight: 700; line-height: 1.1;
-      color: #1a1a1d; margin-bottom: 8px;
-    }
-    .cover-subtitle {
-      font-size: 13pt; color: #444; margin-bottom: 24px;
-    }
-    .cover-meta {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-      margin-top: 24px;
-    }
-    .meta-card {
-      border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 12px 16px;
-    }
-    .meta-card-label { font-size: 8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 4px; }
-    .meta-card-value { font-size: 12pt; font-weight: 600; color: #1a1a1d; }
+      /* ── Cover ────────────────────────────────────────────────────────── */
+      .cover {
+        border-bottom: 3px solid #1a1a1d;
+        padding-bottom: 28px;
+        margin-bottom: 36px;
+      }
+      .cover-eyebrow {
+        font-size: 9pt;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #666;
+        margin-bottom: 12px;
+      }
+      .cover-title {
+        font-size: 28pt;
+        font-weight: 700;
+        line-height: 1.1;
+        color: #1a1a1d;
+        margin-bottom: 8px;
+      }
+      .cover-subtitle {
+        font-size: 13pt;
+        color: #444;
+        margin-bottom: 24px;
+      }
+      .cover-meta {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 24px;
+      }
+      .meta-card {
+        border: 1.5px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 12px 16px;
+      }
+      .meta-card-label {
+        font-size: 8pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #888;
+        margin-bottom: 4px;
+      }
+      .meta-card-value {
+        font-size: 12pt;
+        font-weight: 600;
+        color: #1a1a1d;
+      }
 
-    /* ── Score table ──────────────────────────────────────────────────── */
-    .score-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 9.5pt; }
-    .score-table th {
-      background: #1a1a1d; color: #f0efe8;
-      padding: 8px 12px; text-align: left; font-weight: 600; font-size: 8.5pt;
-    }
-    .score-table td { padding: 8px 12px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
-    .score-table tr:last-child td { border-bottom: 2px solid #1a1a1d; font-weight: 700; }
-    .score-table .points { text-align: right; font-family: var(--mono); }
-    .score-table .score-box { width: 60px; border: 1px solid #bbb; border-radius: 4px; height: 24px; }
+      /* ── Score table ──────────────────────────────────────────────────── */
+      .score-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        font-size: 9.5pt;
+      }
+      .score-table th {
+        background: #1a1a1d;
+        color: #f0efe8;
+        padding: 8px 12px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 8.5pt;
+      }
+      .score-table td {
+        padding: 8px 12px;
+        border-bottom: 1px solid #e8e8e8;
+        vertical-align: top;
+      }
+      .score-table tr:last-child td {
+        border-bottom: 2px solid #1a1a1d;
+        font-weight: 700;
+      }
+      .score-table .points {
+        text-align: right;
+        font-family: var(--mono);
+      }
+      .score-table .score-box {
+        width: 60px;
+        border: 1px solid #bbb;
+        border-radius: 4px;
+        height: 24px;
+      }
 
-    /* ── Sections ─────────────────────────────────────────────────────── */
-    h2.section-title {
-      font-size: 9pt; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: #888;
-      margin: 36px 0 12px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid #e0e0e0;
-    }
+      /* ── Sections ─────────────────────────────────────────────────────── */
+      h2.section-title {
+        font-size: 9pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #888;
+        margin: 36px 0 12px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e0e0e0;
+      }
 
-    h3.part-heading {
-      font-size: 14pt; font-weight: 700; color: #1a1a1d;
-      margin: 28px 0 4px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .part-dot {
-      width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
-      display: inline-block;
-    }
+      h3.part-heading {
+        font-size: 14pt;
+        font-weight: 700;
+        color: #1a1a1d;
+        margin: 28px 0 4px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .part-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: inline-block;
+      }
 
-    .concept-tag {
-      font-size: 8pt; font-weight: 500; color: #555;
-      background: #f0f0f0; border-radius: 4px;
-      padding: 2px 8px; margin-left: 4px;
-      font-family: var(--mono);
-    }
+      .concept-tag {
+        font-size: 8pt;
+        font-weight: 500;
+        color: #555;
+        background: #f0f0f0;
+        border-radius: 4px;
+        padding: 2px 8px;
+        margin-left: 4px;
+        font-family: var(--mono);
+      }
 
-    /* ── Task cards ───────────────────────────────────────────────────── */
-    .task-card {
-      border: 1.5px solid #e0e0e0; border-radius: 10px;
-      padding: 16px 18px; margin: 12px 0;
-    }
-    .task-header {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 12px; margin-bottom: 8px;
-    }
-    .task-title { font-size: 11pt; font-weight: 600; color: #1a1a1d; }
-    .task-badges { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
-    .badge {
-      font-size: 7.5pt; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; border-radius: 4px;
-      padding: 2px 7px; border: 1px solid;
-    }
-    .badge-easy   { color: #059669; background: #ecfdf5; border-color: #a7f3d0; }
-    .badge-medium { color: #d97706; background: #fffbeb; border-color: #fde68a; }
-    .badge-hard   { color: #dc2626; background: #fef2f2; border-color: #fecaca; }
-    .badge-points { color: #2563eb; background: #eff6ff; border-color: #bfdbfe; }
+      /* ── Task cards ───────────────────────────────────────────────────── */
+      .task-card {
+        border: 1.5px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 16px 18px;
+        margin: 12px 0;
+      }
+      .task-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+      .task-title {
+        font-size: 11pt;
+        font-weight: 600;
+        color: #1a1a1d;
+      }
+      .task-badges {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .badge {
+        font-size: 7.5pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        border-radius: 4px;
+        padding: 2px 7px;
+        border: 1px solid;
+      }
+      .badge-easy {
+        color: #059669;
+        background: #ecfdf5;
+        border-color: #a7f3d0;
+      }
+      .badge-medium {
+        color: #d97706;
+        background: #fffbeb;
+        border-color: #fde68a;
+      }
+      .badge-hard {
+        color: #dc2626;
+        background: #fef2f2;
+        border-color: #fecaca;
+      }
+      .badge-points {
+        color: #2563eb;
+        background: #eff6ff;
+        border-color: #bfdbfe;
+      }
 
-    .task-desc { font-size: 9.5pt; color: #444; line-height: 1.65; margin-bottom: 10px; }
+      .task-desc {
+        font-size: 9.5pt;
+        color: #444;
+        line-height: 1.65;
+        margin-bottom: 10px;
+      }
 
-    .task-file {
-      font-family: var(--mono); font-size: 8pt;
-      background: #f5f5f5; border: 1px solid #e0e0e0;
-      border-radius: 5px; padding: 5px 10px;
-      color: #333; margin-bottom: 8px;
-      display: inline-block;
-    }
-    .task-file-label { font-size: 7.5pt; color: #888; font-family: var(--font); margin-bottom: 2px; }
+      .task-file {
+        font-family: var(--mono);
+        font-size: 8pt;
+        background: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 5px 10px;
+        color: #333;
+        margin-bottom: 8px;
+        display: inline-block;
+      }
+      .task-file-label {
+        font-size: 7.5pt;
+        color: #888;
+        font-family: var(--font);
+        margin-bottom: 2px;
+      }
 
-    .task-refs { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
-    .task-ref {
-      font-size: 7.5pt; color: #555;
-      background: #f8f8f8; border: 1px solid #e0e0e0;
-      border-radius: 4px; padding: 2px 8px;
-    }
-    .task-ref a { color: #2563eb; }
-    @media print { .task-ref a::after { content: none !important; } }
+      .task-refs {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .task-ref {
+        font-size: 7.5pt;
+        color: #555;
+        background: #f8f8f8;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        padding: 2px 8px;
+      }
+      .task-ref a {
+        color: #2563eb;
+      }
+      @media print {
+        .task-ref a::after {
+          content: none !important;
+        }
+      }
 
-    .no-refs-note {
-      font-size: 8pt; color: #888; font-style: italic; margin-top: 6px;
-    }
+      .no-refs-note {
+        font-size: 8pt;
+        color: #888;
+        font-style: italic;
+        margin-top: 6px;
+      }
 
-    /* ── Code blocks ──────────────────────────────────────────────────── */
-    pre, code {
-      font-family: var(--mono);
-    }
-    pre {
-      background: #f5f5f5; border: 1px solid #e0e0e0;
-      border-radius: 7px; padding: 14px 16px;
-      font-size: 8pt; line-height: 1.7;
-      overflow-x: auto; margin: 10px 0;
-      white-space: pre;
-    }
-    code { font-size: 8.5pt; background: #f0f0f0; padding: 1px 5px; border-radius: 3px; }
+      /* ── Code blocks ──────────────────────────────────────────────────── */
+      pre,
+      code {
+        font-family: var(--mono);
+      }
+      pre {
+        background: #f5f5f5;
+        border: 1px solid #e0e0e0;
+        border-radius: 7px;
+        padding: 14px 16px;
+        font-size: 8pt;
+        line-height: 1.7;
+        overflow-x: auto;
+        margin: 10px 0;
+        white-space: pre;
+      }
+      code {
+        font-size: 8.5pt;
+        background: #f0f0f0;
+        padding: 1px 5px;
+        border-radius: 3px;
+      }
 
-    /* ── Info boxes ───────────────────────────────────────────────────── */
-    .info-box {
-      border-left: 4px solid #2563eb;
-      background: #eff6ff; border-radius: 0 8px 8px 0;
-      padding: 12px 16px; margin: 14px 0;
-      font-size: 9.5pt;
-    }
-    .info-box strong { color: #1d4ed8; }
-    .warn-box {
-      border-left: 4px solid #d97706;
-      background: #fffbeb; border-radius: 0 8px 8px 0;
-      padding: 12px 16px; margin: 14px 0;
-      font-size: 9.5pt;
-    }
-    .warn-box strong { color: #b45309; }
+      /* ── Info boxes ───────────────────────────────────────────────────── */
+      .info-box {
+        border-left: 4px solid #2563eb;
+        background: #eff6ff;
+        border-radius: 0 8px 8px 0;
+        padding: 12px 16px;
+        margin: 14px 0;
+        font-size: 9.5pt;
+      }
+      .info-box strong {
+        color: #1d4ed8;
+      }
+      .warn-box {
+        border-left: 4px solid #d97706;
+        background: #fffbeb;
+        border-radius: 0 8px 8px 0;
+        padding: 12px 16px;
+        margin: 14px 0;
+        font-size: 9.5pt;
+      }
+      .warn-box strong {
+        color: #b45309;
+      }
 
-    /* ── API table ────────────────────────────────────────────────────── */
-    .api-table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 12px 0; }
-    .api-table th { background: #f0f0f0; padding: 7px 12px; text-align: left; font-weight: 600; border: 1px solid #ddd; }
-    .api-table td { padding: 7px 12px; border: 1px solid #ddd; vertical-align: top; }
-    .api-table td:first-child { font-family: var(--mono); font-size: 8pt; white-space: nowrap; }
-    .api-table td:last-child { font-size: 8pt; color: #555; }
+      /* ── API table ────────────────────────────────────────────────────── */
+      .api-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 9pt;
+        margin: 12px 0;
+      }
+      .api-table th {
+        background: #f0f0f0;
+        padding: 7px 12px;
+        text-align: left;
+        font-weight: 600;
+        border: 1px solid #ddd;
+      }
+      .api-table td {
+        padding: 7px 12px;
+        border: 1px solid #ddd;
+        vertical-align: top;
+      }
+      .api-table td:first-child {
+        font-family: var(--mono);
+        font-size: 8pt;
+        white-space: nowrap;
+      }
+      .api-table td:last-child {
+        font-size: 8pt;
+        color: #555;
+      }
 
-    /* ── Checklist ────────────────────────────────────────────────────── */
-    .checklist { list-style: none; margin: 10px 0 10px 4px; }
-    .checklist li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 9.5pt; margin-bottom: 6px;
-    }
-    .checklist li::before {
-      content: '☐';
-      font-size: 11pt; flex-shrink: 0; color: #bbb;
-      margin-top: -1px;
-    }
+      /* ── Checklist ────────────────────────────────────────────────────── */
+      .checklist {
+        list-style: none;
+        margin: 10px 0 10px 4px;
+      }
+      .checklist li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 9.5pt;
+        margin-bottom: 6px;
+      }
+      .checklist li::before {
+        content: "☐";
+        font-size: 11pt;
+        flex-shrink: 0;
+        color: #bbb;
+        margin-top: -1px;
+      }
 
-    /* ── Footer ───────────────────────────────────────────────────────── */
-    .doc-footer {
-      margin-top: 48px; padding-top: 16px;
-      border-top: 1px solid #e0e0e0;
-      font-size: 8pt; color: #888;
-      display: flex; justify-content: space-between;
-    }
+      /* ── Footer ───────────────────────────────────────────────────────── */
+      .doc-footer {
+        margin-top: 48px;
+        padding-top: 16px;
+        border-top: 1px solid #e0e0e0;
+        font-size: 8pt;
+        color: #888;
+        display: flex;
+        justify-content: space-between;
+      }
 
-    /* ── Utility ──────────────────────────────────────────────────────── */
-    .mt-4 { margin-top: 16px; }
-    .mb-4 { margin-bottom: 16px; }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 4px; font-size: 9.5pt; }
-    p { margin-bottom: 10px; font-size: 9.5pt; line-height: 1.65; }
-  </style>
-</head>
-<body>
-
-<!-- Print bar (screen only) -->
-<div class="print-bar no-print">
-  <span>AltSchool Africa · React Semester 2 Exam · Print or Save as PDF</span>
-  <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
-</div>
-
-<div class="page">
-
-  <!-- ── COVER ──────────────────────────────────────────────────────────── -->
-  <div class="cover avoid-break">
-    <div class="cover-eyebrow">AltSchool Africa · School of Engineering</div>
-    <div class="cover-title">React Second Semester<br/>Examination</div>
-    <div class="cover-subtitle">Build a working Posts &amp; Comments application in React 19</div>
-
-    <div class="cover-meta">
-      <div class="meta-card">
-        <div class="meta-card-label">Total Marks</div>
-        <div class="meta-card-value">100 points</div>
-      </div>
-      <div class="meta-card">
-        <div class="meta-card-label">Duration</div>
-        <div class="meta-card-value">3 hours</div>
-      </div>
-      <div class="meta-card">
-        <div class="meta-card-label">Session</div>
-        <div class="meta-card-value">2025 / 2026</div>
-      </div>
+      /* ── Utility ──────────────────────────────────────────────────────── */
+      .mt-4 {
+        margin-top: 16px;
+      }
+      .mb-4 {
+        margin-bottom: 16px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 4px;
+        font-size: 9.5pt;
+      }
+      p {
+        margin-bottom: 10px;
+        font-size: 9.5pt;
+        line-height: 1.65;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Print bar (screen only) -->
+    <div class="print-bar no-print">
+      <span
+        >AltSchool Africa · React Semester 2 Exam · Print or Save as PDF</span
+      >
+      <button class="print-btn" onclick="window.print()">
+        Print / Save PDF
+      </button>
     </div>
 
-    <!-- Score table -->
-    <table class="score-table mt-4">
-      <thead>
-        <tr>
-          <th>Section</th>
-          <th>Topics Covered</th>
-          <th class="points">Max</th>
-          <th class="points">Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>A — Routing</td>
-          <td>Dynamic routes, useParams, Suspense, ErrorBoundary</td>
-          <td class="points">10</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>B — Data Fetching</td>
-          <td>useSuspenseQuery, queryOptions, useMutation, cache invalidation</td>
-          <td class="points">25</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>C — Components</td>
-          <td>Props, composition, semantic HTML, list rendering</td>
-          <td class="points">20</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>D — State Management</td>
-          <td>createContext, useReducer, useContext, lifting state</td>
-          <td class="points">20</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>E — Forms</td>
-          <td>useActionState, useFormStatus, React 19 form actions</td>
-          <td class="points">10</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>F — Theme</td>
-          <td>Dark/light toggle, CSS variables, localStorage persistence</td>
-          <td class="points">5</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td>G — Loading States</td>
-          <td>Skeleton UI, Suspense boundaries, animate-pulse</td>
-          <td class="points">10</td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-        <tr>
-          <td colspan="2"><strong>Total</strong></td>
-          <td class="points"><strong>100</strong></td>
-          <td class="points"><div class="score-box"></div></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="page">
+      <!-- ── COVER ──────────────────────────────────────────────────────────── -->
+      <div class="cover avoid-break">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:16px;">
+          <img
+            src="https://altschoolafrica.com/icons/android-chrome-192x192.png"
+            alt="AltSchool Africa"
+            style="width:48px; height:48px; border-radius:10px; flex-shrink:0;"
+          />
+          <div class="cover-eyebrow" style="margin-bottom:0;">
+            AltSchool Africa · School of Engineering
+          </div>
+        </div>
+        <div class="cover-title">React Second Semester<br />Examination</div>
+        <div class="cover-subtitle">
+          Build a working Posts &amp; Comments application in React 19
+        </div>
 
-  <!-- ── INSTRUCTIONS ───────────────────────────────────────────────────── -->
-  <h2 class="section-title">General Instructions</h2>
+        <div class="cover-meta">
+          <div class="meta-card">
+            <div class="meta-card-label">Total Marks</div>
+            <div class="meta-card-value">100 points</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">Duration</div>
+            <div class="meta-card-value">5 days</div>
+          </div>
+          <div class="meta-card">
+            <div class="meta-card-label">Session</div>
+            <div class="meta-card-value">2025 / 2026</div>
+          </div>
+        </div>
 
-  <div class="info-box avoid-break">
-    <strong>Read carefully before you begin.</strong> Each task has a corresponding test file.
-    Run <code>npm test</code> at any point to see which tests pass. Passing all tests for a task earns full marks for that task.
-  </div>
+        <!-- Score table -->
+        <table class="score-table mt-4">
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Topics Covered</th>
+              <th class="points">Max</th>
+              <th class="points">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A — Routing</td>
+              <td>Dynamic routes, useParams, Suspense, ErrorBoundary</td>
+              <td class="points">10</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>B — Data Fetching</td>
+              <td>
+                useSuspenseQuery, queryOptions, useMutation, cache invalidation
+              </td>
+              <td class="points">25</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>C — Components</td>
+              <td>Props, composition, semantic HTML, list rendering</td>
+              <td class="points">20</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>D — State Management</td>
+              <td>createContext, useReducer, useContext, lifting state</td>
+              <td class="points">20</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>E — Forms</td>
+              <td>useActionState, useFormStatus, React 19 form actions</td>
+              <td class="points">10</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>F — Theme</td>
+              <td>
+                Dark/light toggle, CSS variables, localStorage persistence
+              </td>
+              <td class="points">5</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td>G — Loading States</td>
+              <td>Skeleton UI, Suspense boundaries, animate-pulse</td>
+              <td class="points">10</td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+            <tr>
+              <td colspan="2"><strong>Total</strong></td>
+              <td class="points"><strong>100</strong></td>
+              <td class="points"><div class="score-box"></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-  <ul>
-    <li>Clone the starter repository and install dependencies: <code>npm install</code></li>
-    <li>Each task stub is located in the file shown on the card. Remove the <code>throw new Error('TODO …')</code> line and replace it with your implementation.</li>
-    <li>Do <strong>not</strong> modify test files, MSW handlers, or any file not listed in a task.</li>
-    <li>Keep all imports at the top of each file. Do not rename exported functions or components.</li>
-    <li>You may use the provided <code>SubmitButton</code> component in <code>src/features/comments/components/submit-button.jsx</code> without modification.</li>
-    <li>Consult the API reference on the last page for exact endpoint shapes.</li>
-    <li>The running application is available at <code>http://localhost:5173</code> after running <code>npm run dev</code>.</li>
-    <li>Submit by pushing your completed branch. Name the branch: <code>exam/&lt;your-name&gt;</code>.</li>
-  </ul>
+      <!-- ── INSTRUCTIONS ───────────────────────────────────────────────────── -->
+      <h2 class="section-title">General Instructions</h2>
 
-  <div class="warn-box avoid-break">
-    <strong>Academic integrity:</strong> This is an individual examination. AI assistants, code sharing, and online submission services are not permitted.
-    The starter project includes a Code Dossier page (<code>/</code>) that links directly to each file in your editor.
-  </div>
+      <div class="info-box avoid-break">
+        <strong>Read carefully before you begin.</strong> Each task has a
+        corresponding test file. Run <code>npm test</code> at any point to see
+        which tests pass. Passing all tests for a task earns full marks for that
+        task.
+      </div>
 
-  <!-- ── TECH STACK ──────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Technology Stack</h2>
-  <p>The starter project is already configured. You do not need to install anything beyond <code>npm install</code>.</p>
+      <ul>
+        <li>
+          Clone the starter repository and install dependencies:
+          <code>npm install</code>
+        </li>
+        <li>
+          Each task stub is located in the file shown on the card. Remove the
+          <code>throw new Error('TODO …')</code> line and replace it with your
+          implementation.
+        </li>
+        <li>
+          Do <strong>not</strong> modify test files, MSW handlers, or any file
+          not listed in a task.
+        </li>
+        <li>
+          Keep all imports at the top of each file. Do not rename exported
+          functions or components.
+        </li>
+        <li>
+          You may use the provided <code>SubmitButton</code> component in
+          <code>src/features/comments/components/submit-button.jsx</code>
+          without modification.
+        </li>
+        <li>
+          Consult the API reference on the last page for exact endpoint shapes.
+        </li>
+        <li>
+          The running application is available at
+          <code>http://localhost:5173</code> after running
+          <code>npm run dev</code>.
+        </li>
+        <li>
+          Submit by pushing your completed branch. Name the branch:
+          <code>exam/&lt;your-name&gt;</code>.
+        </li>
+      </ul>
 
-  <table class="api-table avoid-break">
-    <thead>
-      <tr><th>Library</th><th>Version</th><th>Purpose</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>react</td><td>19</td><td>UI — React Compiler enabled via Babel plugin</td></tr>
-      <tr><td>react-router</td><td>7</td><td>Client-side routing — import from <code>'react-router'</code></td></tr>
-      <tr><td>@tanstack/react-query</td><td>5</td><td>Server state — <code>useSuspenseQuery</code>, <code>useMutation</code>, <code>queryOptions</code></td></tr>
-      <tr><td>@unhead/react</td><td>latest</td><td>Document head / SEO — <code>useHead({ title })</code></td></tr>
-      <tr><td>tailwindcss</td><td>4</td><td>Styling — utility classes + <code>animate-pulse</code> for skeletons</td></tr>
-      <tr><td>react-error-boundary</td><td>latest</td><td>Declarative error boundaries — <code>&lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;</code></td></tr>
-      <tr><td>vitest + @testing-library/react</td><td>latest</td><td>Tests — run with <code>npm test</code></td></tr>
-    </tbody>
-  </table>
+      <div class="warn-box avoid-break">
+        <strong>Academic integrity:</strong> This is an individual examination.
+        Code sharing and online submission services are not permitted.
+        The starter project includes a Code Dossier page
+        (<code>/</code>) that links directly to each file in your editor.
+      </div>
 
-  <!-- ── KEY PATTERNS ────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Key Patterns to Know</h2>
+      <div class="warn-box avoid-break" style="border-left-color:#dc2626; background:#fef2f2;">
+        <strong style="color:#b91c1c;">⚠ Use of AI is strictly prohibited.</strong>
+        The use of AI tools — including but not limited to ChatGPT, GitHub Copilot,
+        Claude, Gemini, or any AI-assisted code completion — during this examination
+        is a violation of academic policy. Submissions suspected of AI involvement
+        will be reviewed. <strong style="color:#b91c1c;">Detection will result in a
+        score of zero and disciplinary action in accordance with AltSchool Africa's
+        academic integrity policy.</strong>
+      </div>
 
-  <p><strong>useSuspenseQuery</strong> — the project uses the Suspense pattern. There are no <code>isLoading</code> flags. Wrap consumers in <code>&lt;Suspense fallback={&lt;Skeleton /&gt;}&gt;</code>.</p>
+      <!-- ── TECH STACK ──────────────────────────────────────────────────────── -->
+      <h2 class="section-title">Technology Stack</h2>
+      <p>
+        The starter project is already configured. You do not need to install
+        anything beyond <code>npm install</code>.
+      </p>
 
-  <pre>// Pattern from get-posts.js — mirror this exactly
+      <table class="api-table avoid-break">
+        <thead>
+          <tr>
+            <th>Library</th>
+            <th>Version</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>react</td>
+            <td>19</td>
+            <td>UI — React Compiler enabled via Babel plugin</td>
+          </tr>
+          <tr>
+            <td>react-router</td>
+            <td>7</td>
+            <td>
+              Client-side routing — import from <code>'react-router'</code>
+            </td>
+          </tr>
+          <tr>
+            <td>@tanstack/react-query</td>
+            <td>5</td>
+            <td>
+              Server state — <code>useSuspenseQuery</code>,
+              <code>useMutation</code>, <code>queryOptions</code>
+            </td>
+          </tr>
+          <tr>
+            <td>@unhead/react</td>
+            <td>latest</td>
+            <td>Document head / SEO — <code>useHead({ title })</code></td>
+          </tr>
+          <tr>
+            <td>tailwindcss</td>
+            <td>4</td>
+            <td>
+              Styling — utility classes + <code>animate-pulse</code> for
+              skeletons
+            </td>
+          </tr>
+          <tr>
+            <td>react-error-boundary</td>
+            <td>latest</td>
+            <td>
+              Declarative error boundaries —
+              <code
+                >&lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;</code
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>vitest + @testing-library/react</td>
+            <td>latest</td>
+            <td>Tests — run with <code>npm test</code></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ── KEY PATTERNS ────────────────────────────────────────────────────── -->
+      <h2 class="section-title">Key Patterns to Know</h2>
+
+      <p>
+        <strong>useSuspenseQuery</strong> — the project uses the Suspense
+        pattern. There are no <code>isLoading</code> flags. Wrap consumers in
+        <code>&lt;Suspense fallback={&lt;Skeleton /&gt;}&gt;</code>.
+      </p>
+
+      <pre>
+// Pattern from get-posts.js — mirror this exactly
 import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
 import { apiClient } from '@/lib/api-client'
 
@@ -400,11 +759,17 @@ export const getPostsQueryOptions = ({ page = 1 } = {}) =>
 
 export function usePosts({ page = 1 } = {}) {
   return useSuspenseQuery(getPostsQueryOptions({ page }))
-}</pre>
+}</pre
+      >
 
-  <p><strong>useMutation + cache invalidation</strong> — after a successful mutation, call <code>queryClient.invalidateQueries</code> so the UI refreshes automatically.</p>
+      <p>
+        <strong>useMutation + cache invalidation</strong> — after a successful
+        mutation, call <code>queryClient.invalidateQueries</code> so the UI
+        refreshes automatically.
+      </p>
 
-  <pre>import { useMutation, useQueryClient } from '@tanstack/react-query'
+      <pre>
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export function useCreateComment({ postId }) {
   const queryClient = useQueryClient()
@@ -414,11 +779,18 @@ export function useCreateComment({ postId }) {
       queryClient.invalidateQueries({ queryKey: ['comments', postId] })
     },
   })
-}</pre>
+}</pre
+      >
 
-  <p><strong>React 19 form actions</strong> — use <code>useActionState</code> with <code>&lt;form action={formAction}&gt;</code>, not <code>onSubmit</code>.</p>
+      <p>
+        <strong>React 19 form actions</strong> — use
+        <code>useActionState</code> with
+        <code>&lt;form action={formAction}&gt;</code>, not
+        <code>onSubmit</code>.
+      </p>
 
-  <pre>import { useActionState } from 'react'
+      <pre>
+import { useActionState } from 'react'
 
 const [state, formAction] = useActionState(
   async (prevState, formData) => {
@@ -432,11 +804,17 @@ const [state, formAction] = useActionState(
   { error: null }
 )
 
-return &lt;form action={formAction}&gt;...&lt;/form&gt;</pre>
+return &lt;form action={formAction}&gt;...&lt;/form&gt;</pre
+      >
 
-  <p><strong>Context + Reducer</strong> — use <code>createContext</code> paired with <code>useReducer</code> for shared state. Expose the dispatch function in the context value.</p>
+      <p>
+        <strong>Context + Reducer</strong> — use
+        <code>createContext</code> paired with <code>useReducer</code> for
+        shared state. Expose the dispatch function in the context value.
+      </p>
 
-  <pre>import { createContext, useReducer, useContext } from 'react'
+      <pre>
+import { createContext, useReducer, useContext } from 'react'
 
 const PostsContext = createContext(null)
 
@@ -461,417 +839,733 @@ export function usePostsContext() {
   const ctx = useContext(PostsContext)
   if (!ctx) throw new Error('usePostsContext must be used inside PostsProvider')
   return ctx
-}</pre>
+}</pre
+      >
 
-  <!-- ── SECTION A ────────────────────────────────────────────────────────── -->
-  <div class="page-break"></div>
-  <h2 class="section-title">Section A — Routing &nbsp;·&nbsp; 10 points</h2>
+      <!-- ── SECTION A ────────────────────────────────────────────────────────── -->
+      <div class="page-break"></div>
+      <h2 class="section-title">Section A — Routing &nbsp;·&nbsp; 10 points</h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#FF6B35"></span>
-    Dynamic Routes &amp; useParams
-  </h3>
-  <p>Concepts: <code class="concept-tag">useParams · Suspense · ErrorBoundary · useHead</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #ff6b35"></span>
+        Dynamic Routes &amp; useParams
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >useParams · Suspense · ErrorBoundary · useHead</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">A1 — Post Detail Route</div>
-      <div class="task-badges">
-        <span class="badge badge-medium">medium</span>
-        <span class="badge badge-points">10 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">A1 — Post Detail Route</div>
+          <div class="task-badges">
+            <span class="badge badge-medium">medium</span>
+            <span class="badge badge-points">10 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement the <code>/posts/:id</code> route component. It must:
+        </p>
+        <ul style="margin-bottom: 10px">
+          <li>
+            Use <code>useParams()</code> to extract <code>id</code> from the
+            URL.
+          </li>
+          <li>
+            Call <code>useHead({ title: post.title })</code> for SEO (after
+            fetching the post).
+          </li>
+          <li>
+            Render <code>&lt;PostView&gt;</code> inside
+            <code>&lt;Suspense fallback={&lt;PostViewSkeleton /&gt;}&gt;</code>.
+          </li>
+          <li>
+            Below the post, render a comments section with heading "Comments".
+          </li>
+          <li>
+            Wrap <code>&lt;CommentsList&gt;</code> in
+            <code
+              >&lt;Suspense fallback={&lt;CommentsListSkeleton /&gt;}&gt;</code
+            >.
+          </li>
+          <li>
+            Wrap that <code>Suspense</code> in
+            <code>&lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;</code>
+            so a comments failure does not break the page.
+          </li>
+          <li>Render <code>&lt;CreateComment&gt;</code> below the list.</li>
+          <li>Include a back link to <code>/posts</code>.</li>
+        </ul>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/app/routes/posts/post.jsx</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://reactrouter.com/api/hooks/useParams"
+              class="no-href-print"
+              >useParams — reactrouter.com</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a href="https://react.oluwasetemi.dev/187" class="no-href-print"
+              >Class Notes: Routing</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/Suspense"
+              class="no-href-print"
+              >Suspense — react.dev</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement the <code>/posts/:id</code> route component. It must:
-    </p>
-    <ul style="margin-bottom:10px;">
-      <li>Use <code>useParams()</code> to extract <code>id</code> from the URL.</li>
-      <li>Call <code>useHead({ title: post.title })</code> for SEO (after fetching the post).</li>
-      <li>Render <code>&lt;PostView&gt;</code> inside <code>&lt;Suspense fallback={&lt;PostViewSkeleton /&gt;}&gt;</code>.</li>
-      <li>Below the post, render a comments section with heading "Comments".</li>
-      <li>Wrap <code>&lt;CommentsList&gt;</code> in <code>&lt;Suspense fallback={&lt;CommentsListSkeleton /&gt;}&gt;</code>.</li>
-      <li>Wrap that <code>Suspense</code> in <code>&lt;ErrorBoundary FallbackComponent={ErrorFallback}&gt;</code> so a comments failure does not break the page.</li>
-      <li>Render <code>&lt;CreateComment&gt;</code> below the list.</li>
-      <li>Include a back link to <code>/posts</code>.</li>
-    </ul>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/app/routes/posts/post.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://reactrouter.com/api/hooks/useParams" class="no-href-print">useParams — reactrouter.com</a></span>
-      <span class="task-ref"><a href="https://react.oluwasetemi.dev/187" class="no-href-print">Class Notes: Routing</a></span>
-      <span class="task-ref"><a href="https://react.dev/reference/react/Suspense" class="no-href-print">Suspense — react.dev</a></span>
-    </div>
-  </div>
 
-  <!-- ── SECTION B ────────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Section B — Data Fetching &nbsp;·&nbsp; 25 points</h2>
+      <!-- ── SECTION B ────────────────────────────────────────────────────────── -->
+      <h2 class="section-title">
+        Section B — Data Fetching &nbsp;·&nbsp; 25 points
+      </h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#4ECDC4"></span>
-    TanStack Query v5 — Suspense Pattern
-  </h3>
-  <p>Concepts: <code class="concept-tag">useSuspenseQuery · queryOptions · useMutation · invalidateQueries</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #4ecdc4"></span>
+        TanStack Query v5 — Suspense Pattern
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >useSuspenseQuery · queryOptions · useMutation ·
+          invalidateQueries</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">B1 — usePost Hook</div>
-      <div class="task-badges">
-        <span class="badge badge-medium">medium</span>
-        <span class="badge badge-points">8 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">B1 — usePost Hook</div>
+          <div class="task-badges">
+            <span class="badge badge-medium">medium</span>
+            <span class="badge badge-points">8 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement <code>getPostQueryOptions(id)</code> and
+          <code>usePost(id)</code> using <code>useSuspenseQuery</code>. Fetch
+          from <code>GET /posts/:id</code>. Use
+          <code>queryKey: ['posts', id]</code>. Mirror the exact pattern in
+          <code>src/features/posts/api/get-posts.js</code>.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/features/posts/api/get-post.js</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://tanstack.com/query/latest/docs/framework/react/guides/suspense"
+              class="no-href-print"
+              >useSuspenseQuery</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions"
+              class="no-href-print"
+              >queryOptions</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a href="https://react.oluwasetemi.dev" class="no-href-print"
+              >Class Notes: Data Fetching</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement <code>getPostQueryOptions(id)</code> and <code>usePost(id)</code> using <code>useSuspenseQuery</code>.
-      Fetch from <code>GET /posts/:id</code>. Use <code>queryKey: ['posts', id]</code>.
-      Mirror the exact pattern in <code>src/features/posts/api/get-posts.js</code>.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/posts/api/get-post.js</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://tanstack.com/query/latest/docs/framework/react/guides/suspense" class="no-href-print">useSuspenseQuery</a></span>
-      <span class="task-ref"><a href="https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions" class="no-href-print">queryOptions</a></span>
-      <span class="task-ref"><a href="https://react.oluwasetemi.dev" class="no-href-print">Class Notes: Data Fetching</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">B2 — useComments Hook</div>
-      <div class="task-badges">
-        <span class="badge badge-medium">medium</span>
-        <span class="badge badge-points">8 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">B2 — useComments Hook</div>
+          <div class="task-badges">
+            <span class="badge badge-medium">medium</span>
+            <span class="badge badge-points">8 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement <code>getCommentsQueryOptions(postId)</code> and
+          <code>useComments(postId)</code>. Fetch from
+          <code>GET /posts/:postId/comments</code>. Use
+          <code>queryKey: ['comments', postId]</code>.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/features/comments/api/get-comments.js</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://tanstack.com/query/latest/docs/framework/react/guides/suspense"
+              class="no-href-print"
+              >useSuspenseQuery</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a href="https://react.oluwasetemi.dev" class="no-href-print"
+              >Class Notes: Data Fetching</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement <code>getCommentsQueryOptions(postId)</code> and <code>useComments(postId)</code>.
-      Fetch from <code>GET /posts/:postId/comments</code>. Use <code>queryKey: ['comments', postId]</code>.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/api/get-comments.js</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://tanstack.com/query/latest/docs/framework/react/guides/suspense" class="no-href-print">useSuspenseQuery</a></span>
-      <span class="task-ref"><a href="https://react.oluwasetemi.dev" class="no-href-print">Class Notes: Data Fetching</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">B3 — useCreateComment Mutation</div>
-      <div class="task-badges">
-        <span class="badge badge-hard">hard</span>
-        <span class="badge badge-points">9 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">B3 — useCreateComment Mutation</div>
+          <div class="task-badges">
+            <span class="badge badge-hard">hard</span>
+            <span class="badge badge-points">9 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement a <code>useMutation</code> hook that POSTs to
+          <code>/posts/:postId/comments</code>. On success, call
+          <code
+            >queryClient.invalidateQueries({ queryKey: ['comments', postId]
+            })</code
+          >
+          so the comments list refreshes automatically.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/features/comments/api/create-comment.js</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://tanstack.com/query/latest/docs/framework/react/reference/useMutation"
+              class="no-href-print"
+              >useMutation</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://tanstack.com/query/latest/docs/reference/QueryClient#queryclientinvalidatequeries"
+              class="no-href-print"
+              >invalidateQueries</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a href="https://react.oluwasetemi.dev" class="no-href-print"
+              >Class Notes: Mutations</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement a <code>useMutation</code> hook that POSTs to <code>/posts/:postId/comments</code>.
-      On success, call <code>queryClient.invalidateQueries({ queryKey: ['comments', postId] })</code>
-      so the comments list refreshes automatically.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/api/create-comment.js</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://tanstack.com/query/latest/docs/framework/react/reference/useMutation" class="no-href-print">useMutation</a></span>
-      <span class="task-ref"><a href="https://tanstack.com/query/latest/docs/reference/QueryClient#queryclientinvalidatequeries" class="no-href-print">invalidateQueries</a></span>
-      <span class="task-ref"><a href="https://react.oluwasetemi.dev" class="no-href-print">Class Notes: Mutations</a></span>
-    </div>
-  </div>
 
-  <!-- ── SECTION C ────────────────────────────────────────────────────────── -->
-  <div class="page-break"></div>
-  <h2 class="section-title">Section C — Components &nbsp;·&nbsp; 20 points</h2>
+      <!-- ── SECTION C ────────────────────────────────────────────────────────── -->
+      <div class="page-break"></div>
+      <h2 class="section-title">
+        Section C — Components &nbsp;·&nbsp; 20 points
+      </h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#FFE66D"></span>
-    Props · Composition · Semantic HTML
-  </h3>
-  <p>Concepts: <code class="concept-tag">props · article · time · key · empty state</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #ffe66d"></span>
+        Props · Composition · Semantic HTML
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >props · article · time · key · empty state</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">C1 — PostView Component</div>
-      <div class="task-badges">
-        <span class="badge badge-easy">easy</span>
-        <span class="badge badge-points">6 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">C1 — PostView Component</div>
+          <div class="task-badges">
+            <span class="badge badge-easy">easy</span>
+            <span class="badge badge-points">6 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Render a post's <code>title</code> as an <code>&lt;h1&gt;</code>,
+          <code>body</code> as a paragraph, and formatted
+          <code>createdAt</code> date. Use semantic HTML: wrap in
+          <code>&lt;article&gt;</code>, render the date inside
+          <code>&lt;time dateTime={post.createdAt}&gt;</code>. Accept a single
+          <code>post</code> prop.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/features/posts/components/post-view.jsx</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/learn/passing-props-to-a-component"
+              class="no-href-print"
+              >Passing Props — react.dev</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article"
+              class="no-href-print"
+              >&lt;article&gt; — MDN</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Render a post's <code>title</code> as an <code>&lt;h1&gt;</code>, <code>body</code> as a paragraph, and formatted <code>createdAt</code> date.
-      Use semantic HTML: wrap in <code>&lt;article&gt;</code>, render the date inside
-      <code>&lt;time dateTime={post.createdAt}&gt;</code>. Accept a single <code>post</code> prop.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/posts/components/post-view.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/learn/passing-props-to-a-component" class="no-href-print">Passing Props — react.dev</a></span>
-      <span class="task-ref"><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" class="no-href-print">&lt;article&gt; — MDN</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">C2 — CommentCard Component</div>
-      <div class="task-badges">
-        <span class="badge badge-easy">easy</span>
-        <span class="badge badge-points">6 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">C2 — CommentCard Component</div>
+          <div class="task-badges">
+            <span class="badge badge-easy">easy</span>
+            <span class="badge badge-points">6 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Render a single comment's <code>body</code>, <code>userId</code> as
+          the author, and formatted <code>createdAt</code> date. Wrap in
+          <code>&lt;article&gt;</code> for accessibility. Accept a single
+          <code>comment</code> prop.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/comments/components/comment-card.jsx
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/learn/passing-props-to-a-component"
+              class="no-href-print"
+              >Passing Props — react.dev</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Render a single comment's <code>body</code>, <code>userId</code> as the author, and formatted <code>createdAt</code> date.
-      Wrap in <code>&lt;article&gt;</code> for accessibility. Accept a single <code>comment</code> prop.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/components/comment-card.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/learn/passing-props-to-a-component" class="no-href-print">Passing Props — react.dev</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">C3 — CommentsList Component</div>
-      <div class="task-badges">
-        <span class="badge badge-easy">easy</span>
-        <span class="badge badge-points">8 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">C3 — CommentsList Component</div>
+          <div class="task-badges">
+            <span class="badge badge-easy">easy</span>
+            <span class="badge badge-points">8 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Accept a <code>postId</code> prop. Call
+          <code>useComments(postId)</code> to get the comments array. Map over
+          it, rendering a <code>&lt;CommentCard&gt;</code> for each item using
+          <code>comment.id</code> as the <code>key</code>. When
+          <code>comments.length === 0</code>, display the text
+          <strong>"No comments yet."</strong>
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/comments/components/comments-list.jsx
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/learn/rendering-lists"
+              class="no-href-print"
+              >Rendering Lists — react.dev</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Accept a <code>postId</code> prop. Call <code>useComments(postId)</code> to get the comments array.
-      Map over it, rendering a <code>&lt;CommentCard&gt;</code> for each item using <code>comment.id</code> as the <code>key</code>.
-      When <code>comments.length === 0</code>, display the text <strong>"No comments yet."</strong>
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/components/comments-list.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/learn/rendering-lists" class="no-href-print">Rendering Lists — react.dev</a></span>
-    </div>
-  </div>
 
-  <!-- ── SECTION D ────────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Section D — State Management &nbsp;·&nbsp; 20 points</h2>
+      <!-- ── SECTION D ────────────────────────────────────────────────────────── -->
+      <h2 class="section-title">
+        Section D — State Management &nbsp;·&nbsp; 20 points
+      </h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#A78BFA"></span>
-    Context · Reducer · Lifting State
-  </h3>
-  <p>Concepts: <code class="concept-tag">createContext · useReducer · useContext · dispatch</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #a78bfa"></span>
+        Context · Reducer · Lifting State
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >createContext · useReducer · useContext · dispatch</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">D1 — PostsContext &amp; PostsProvider</div>
-      <div class="task-badges">
-        <span class="badge badge-hard">hard</span>
-        <span class="badge badge-points">12 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">D1 — PostsContext &amp; PostsProvider</div>
+          <div class="task-badges">
+            <span class="badge badge-hard">hard</span>
+            <span class="badge badge-points">12 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Create <code>PostsContext</code> using
+          <code>createContext(null)</code>. Implement
+          <code>PostsProvider</code> with <code>useReducer</code> managing two
+          actions:
+        </p>
+        <ul style="margin-bottom: 10px">
+          <li>
+            <code>SET_SEARCH</code> — sets <code>state.search</code> to
+            <code>action.payload</code>
+          </li>
+          <li>
+            <code>SET_FILTER</code> — sets <code>state.filter</code> to
+            <code>action.payload</code>
+          </li>
+        </ul>
+        <p class="task-desc">
+          Initial state: <code>{'{ search: \'\', filter: \'all\' }'}</code>.
+          Provider value must be <code>{'{ ...state, dispatch }'}</code>. Export
+          a <code>usePostsContext()</code> hook that throws if used outside the
+          provider.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">src/context/posts-context.jsx</div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/createContext"
+              class="no-href-print"
+              >createContext</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/useReducer"
+              class="no-href-print"
+              >useReducer</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/learn/scaling-up-with-reducer-and-context"
+              class="no-href-print"
+              >Context + Reducer</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Create <code>PostsContext</code> using <code>createContext(null)</code>. Implement <code>PostsProvider</code>
-      with <code>useReducer</code> managing two actions:
-    </p>
-    <ul style="margin-bottom:10px;">
-      <li><code>SET_SEARCH</code> — sets <code>state.search</code> to <code>action.payload</code></li>
-      <li><code>SET_FILTER</code> — sets <code>state.filter</code> to <code>action.payload</code></li>
-    </ul>
-    <p class="task-desc">
-      Initial state: <code>{'{ search: \'\', filter: \'all\' }'}</code>.
-      Provider value must be <code>{'{ ...state, dispatch }'}</code>.
-      Export a <code>usePostsContext()</code> hook that throws if used outside the provider.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/context/posts-context.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/reference/react/createContext" class="no-href-print">createContext</a></span>
-      <span class="task-ref"><a href="https://react.dev/reference/react/useReducer" class="no-href-print">useReducer</a></span>
-      <span class="task-ref"><a href="https://react.dev/learn/scaling-up-with-reducer-and-context" class="no-href-print">Context + Reducer</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">D2 — PostsFilters — Context Refactor</div>
-      <div class="task-badges">
-        <span class="badge badge-medium">medium</span>
-        <span class="badge badge-points">8 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">D2 — PostsFilters — Context Refactor</div>
+          <div class="task-badges">
+            <span class="badge badge-medium">medium</span>
+            <span class="badge badge-points">8 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Refactor <code>PostsFilters</code> to read <code>search</code> and
+          <code>filter</code> from <code>PostsContext</code> via
+          <code>useContext</code> — no props. On text input change call
+          <code>dispatch({ type: 'SET_SEARCH', payload: value })</code>. On
+          filter select change call
+          <code>dispatch({ type: 'SET_FILTER', payload: value })</code>.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/posts/components/posts-filters.jsx
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/useContext"
+              class="no-href-print"
+              >useContext</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/learn/passing-data-deeply-with-context"
+              class="no-href-print"
+              >Passing Data Deeply</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Refactor <code>PostsFilters</code> to read <code>search</code> and <code>filter</code> from
-      <code>PostsContext</code> via <code>useContext</code> — no props.
-      On text input change call <code>dispatch({ type: 'SET_SEARCH', payload: value })</code>.
-      On filter select change call <code>dispatch({ type: 'SET_FILTER', payload: value })</code>.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/posts/components/posts-filters.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/reference/react/useContext" class="no-href-print">useContext</a></span>
-      <span class="task-ref"><a href="https://react.dev/learn/passing-data-deeply-with-context" class="no-href-print">Passing Data Deeply</a></span>
-    </div>
-  </div>
 
-  <!-- ── SECTION E ────────────────────────────────────────────────────────── -->
-  <div class="page-break"></div>
-  <h2 class="section-title">Section E — Forms &nbsp;·&nbsp; 10 points</h2>
+      <!-- ── SECTION E ────────────────────────────────────────────────────────── -->
+      <div class="page-break"></div>
+      <h2 class="section-title">Section E — Forms &nbsp;·&nbsp; 10 points</h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#F472B6"></span>
-    React 19 Form Actions
-  </h3>
-  <p>Concepts: <code class="concept-tag">useActionState · useFormStatus · form action</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #f472b6"></span>
+        React 19 Form Actions
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >useActionState · useFormStatus · form action</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">E1 — CreateComment Form</div>
-      <div class="task-badges">
-        <span class="badge badge-hard">hard</span>
-        <span class="badge badge-points">10 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">E1 — CreateComment Form</div>
+          <div class="task-badges">
+            <span class="badge badge-hard">hard</span>
+            <span class="badge badge-points">10 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement the comment submission form using
+          <strong>React 19 form actions</strong>:
+        </p>
+        <ul style="margin-bottom: 10px">
+          <li>
+            Use <code>useActionState(asyncFn, {'{ error: null }'})</code> for
+            form state.
+          </li>
+          <li>
+            The async function receives <code>(prevState, formData)</code>.
+            Extract the comment body with <code>formData.get('body')</code>.
+          </li>
+          <li>
+            Call <code>createComment.mutateAsync</code> (from
+            <code>useCreateComment</code>) with <code>{'{ body }'}</code>.
+          </li>
+          <li>
+            On success return <code>{'{ error: null }'}</code>; on failure
+            return <code>{'{ error: err.message }'}</code>.
+          </li>
+          <li>
+            Use <code>&lt;form action={formAction}&gt;</code> —
+            <strong>not</strong> <code>onSubmit</code>.
+          </li>
+          <li>
+            Render <code>&lt;SubmitButton&gt;</code> (already implemented, uses
+            <code>useFormStatus</code>) inside the form.
+          </li>
+          <li>Display <code>state.error</code> if present.</li>
+        </ul>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/comments/components/create-comment.jsx
+        </div>
+        <div class="info-box" style="margin-top: 10px">
+          <strong>Tip:</strong> <code>SubmitButton</code> is provided in
+          <code>src/features/comments/components/submit-button.jsx</code> and
+          handles pending state internally via <code>useFormStatus</code>. You
+          only need to place it inside the <code>&lt;form&gt;</code>.
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/useActionState"
+              class="no-href-print"
+              >useActionState</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react-dom/useFormStatus"
+              class="no-href-print"
+              >useFormStatus</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement the comment submission form using <strong>React 19 form actions</strong>:
-    </p>
-    <ul style="margin-bottom:10px;">
-      <li>Use <code>useActionState(asyncFn, {'{ error: null }'})</code> for form state.</li>
-      <li>The async function receives <code>(prevState, formData)</code>. Extract the comment body with <code>formData.get('body')</code>.</li>
-      <li>Call <code>createComment.mutateAsync</code> (from <code>useCreateComment</code>) with <code>{'{ body }'}</code>.</li>
-      <li>On success return <code>{'{ error: null }'}</code>; on failure return <code>{'{ error: err.message }'}</code>.</li>
-      <li>Use <code>&lt;form action={formAction}&gt;</code> — <strong>not</strong> <code>onSubmit</code>.</li>
-      <li>Render <code>&lt;SubmitButton&gt;</code> (already implemented, uses <code>useFormStatus</code>) inside the form.</li>
-      <li>Display <code>state.error</code> if present.</li>
-    </ul>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/components/create-comment.jsx</div>
-    <div class="info-box" style="margin-top:10px;">
-      <strong>Tip:</strong> <code>SubmitButton</code> is provided in
-      <code>src/features/comments/components/submit-button.jsx</code> and handles pending state internally via <code>useFormStatus</code>.
-      You only need to place it inside the <code>&lt;form&gt;</code>.
-    </div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/reference/react/useActionState" class="no-href-print">useActionState</a></span>
-      <span class="task-ref"><a href="https://react.dev/reference/react-dom/useFormStatus" class="no-href-print">useFormStatus</a></span>
-    </div>
-  </div>
 
-  <!-- ── SECTION F ────────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Section F — Theme &nbsp;·&nbsp; 5 points</h2>
+      <!-- ── SECTION F ────────────────────────────────────────────────────────── -->
+      <h2 class="section-title">Section F — Theme &nbsp;·&nbsp; 5 points</h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#94A3B8"></span>
-    Dark / Light Theme Toggle
-  </h3>
-  <p>Concepts: <code class="concept-tag">localStorage · CSS variables · className toggling</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #94a3b8"></span>
+        Dark / Light Theme Toggle
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >localStorage · CSS variables · className toggling</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">F1 — ThemeToggle Component</div>
-      <div class="task-badges">
-        <span class="badge badge-hard">hard</span>
-        <span class="badge badge-points">5 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">F1 — ThemeToggle Component</div>
+          <div class="task-badges">
+            <span class="badge badge-hard">hard</span>
+            <span class="badge badge-points">5 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Implement a <code>ThemeToggle</code> component that lets users switch
+          between dark and light themes. The chosen theme must persist when the
+          page is refreshed.
+        </p>
+        <p class="task-desc">
+          You have freedom in how you implement this. Consider:
+        </p>
+        <ul style="margin-bottom: 10px">
+          <li>
+            Where to store the current theme state (<code>useState</code>,
+            context, or a custom hook).
+          </li>
+          <li>
+            How to apply the theme (toggling a class on
+            <code>document.documentElement</code>, or updating a CSS custom
+            property).
+          </li>
+          <li>
+            How to read the persisted value on first render to avoid a flash of
+            wrong theme.
+          </li>
+          <li>
+            What the button should render (icon, text, or both) to communicate
+            the current and next state.
+          </li>
+        </ul>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/theme/components/theme-toggle.jsx
+        </div>
+        <p class="no-refs-note">
+          No documentation references provided — research the approach yourself.
+        </p>
       </div>
-    </div>
-    <p class="task-desc">
-      Implement a <code>ThemeToggle</code> component that lets users switch between dark and light themes.
-      The chosen theme must persist when the page is refreshed.
-    </p>
-    <p class="task-desc">You have freedom in how you implement this. Consider:</p>
-    <ul style="margin-bottom:10px;">
-      <li>Where to store the current theme state (<code>useState</code>, context, or a custom hook).</li>
-      <li>How to apply the theme (toggling a class on <code>document.documentElement</code>, or updating a CSS custom property).</li>
-      <li>How to read the persisted value on first render to avoid a flash of wrong theme.</li>
-      <li>What the button should render (icon, text, or both) to communicate the current and next state.</li>
-    </ul>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/theme/components/theme-toggle.jsx</div>
-    <p class="no-refs-note">No documentation references provided — research the approach yourself.</p>
-  </div>
 
-  <!-- ── SECTION G ────────────────────────────────────────────────────────── -->
-  <h2 class="section-title">Section G — Loading States &nbsp;·&nbsp; 10 points</h2>
+      <!-- ── SECTION G ────────────────────────────────────────────────────────── -->
+      <h2 class="section-title">
+        Section G — Loading States &nbsp;·&nbsp; 10 points
+      </h2>
 
-  <h3 class="part-heading">
-    <span class="part-dot" style="background:#34D399"></span>
-    Skeleton UI &amp; Suspense Boundaries
-  </h3>
-  <p>Concepts: <code class="concept-tag">Suspense fallback · Skeleton · animate-pulse</code></p>
+      <h3 class="part-heading">
+        <span class="part-dot" style="background: #34d399"></span>
+        Skeleton UI &amp; Suspense Boundaries
+      </h3>
+      <p>
+        Concepts:
+        <code class="concept-tag"
+          >Suspense fallback · Skeleton · animate-pulse</code
+        >
+      </p>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">G1 — PostViewSkeleton</div>
-      <div class="task-badges">
-        <span class="badge badge-easy">easy</span>
-        <span class="badge badge-points">5 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">G1 — PostViewSkeleton</div>
+          <div class="task-badges">
+            <span class="badge badge-easy">easy</span>
+            <span class="badge badge-points">5 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Build skeleton placeholder shapes that mirror the
+          <code>PostView</code> layout: a large rectangle for the title, several
+          lines for the body, and a small one for the date. Use the existing
+          <code>Skeleton</code> component from
+          <code>@/components/ui/skeleton</code> and the Tailwind class
+          <code>animate-pulse</code>. This is used as the
+          <code>fallback</code> for the <code>&lt;Suspense&gt;</code> wrapping
+          <code>&lt;PostView&gt;</code> on the post detail page.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/posts/components/post-view-skeleton.jsx
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/Suspense"
+              class="no-href-print"
+              >Suspense — react.dev</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://tailwindcss.com/docs/animation"
+              class="no-href-print"
+              >animate-pulse — tailwindcss.com</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Build skeleton placeholder shapes that mirror the <code>PostView</code> layout:
-      a large rectangle for the title, several lines for the body, and a small one for the date.
-      Use the existing <code>Skeleton</code> component from <code>@/components/ui/skeleton</code> and
-      the Tailwind class <code>animate-pulse</code>. This is used as the <code>fallback</code> for
-      the <code>&lt;Suspense&gt;</code> wrapping <code>&lt;PostView&gt;</code> on the post detail page.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/posts/components/post-view-skeleton.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/reference/react/Suspense" class="no-href-print">Suspense — react.dev</a></span>
-      <span class="task-ref"><a href="https://tailwindcss.com/docs/animation" class="no-href-print">animate-pulse — tailwindcss.com</a></span>
-    </div>
-  </div>
 
-  <div class="task-card avoid-break">
-    <div class="task-header">
-      <div class="task-title">G2 — CommentsListSkeleton</div>
-      <div class="task-badges">
-        <span class="badge badge-easy">easy</span>
-        <span class="badge badge-points">5 pts</span>
+      <div class="task-card avoid-break">
+        <div class="task-header">
+          <div class="task-title">G2 — CommentsListSkeleton</div>
+          <div class="task-badges">
+            <span class="badge badge-easy">easy</span>
+            <span class="badge badge-points">5 pts</span>
+          </div>
+        </div>
+        <p class="task-desc">
+          Build 3–4 skeleton card shapes that match the
+          <code>CommentCard</code> layout: a body line and an author/date line
+          per card. Used as the <code>fallback</code> for the
+          <code>&lt;Suspense&gt;</code> wrapping
+          <code>&lt;CommentsList&gt;</code> in the post detail page comments
+          section.
+        </p>
+        <div class="task-file-label">File to edit:</div>
+        <div class="task-file">
+          src/features/comments/components/comments-list-skeleton.jsx
+        </div>
+        <div class="task-refs">
+          <span class="task-ref"
+            ><a
+              href="https://react.dev/reference/react/Suspense"
+              class="no-href-print"
+              >Suspense — react.dev</a
+            ></span
+          >
+          <span class="task-ref"
+            ><a
+              href="https://tailwindcss.com/docs/animation"
+              class="no-href-print"
+              >animate-pulse — tailwindcss.com</a
+            ></span
+          >
+        </div>
       </div>
-    </div>
-    <p class="task-desc">
-      Build 3–4 skeleton card shapes that match the <code>CommentCard</code> layout: a body line and
-      an author/date line per card. Used as the <code>fallback</code> for the <code>&lt;Suspense&gt;</code>
-      wrapping <code>&lt;CommentsList&gt;</code> in the post detail page comments section.
-    </p>
-    <div class="task-file-label">File to edit:</div>
-    <div class="task-file">src/features/comments/components/comments-list-skeleton.jsx</div>
-    <div class="task-refs">
-      <span class="task-ref"><a href="https://react.dev/reference/react/Suspense" class="no-href-print">Suspense — react.dev</a></span>
-      <span class="task-ref"><a href="https://tailwindcss.com/docs/animation" class="no-href-print">animate-pulse — tailwindcss.com</a></span>
-    </div>
-  </div>
 
-  <!-- ── API REFERENCE ──────────────────────────────────────────────────────── -->
-  <div class="page-break"></div>
-  <h2 class="section-title">API Reference &nbsp;·&nbsp; api.oluwasetemi.dev</h2>
-  <p>All requests use the base URL <code>https://api.oluwasetemi.dev</code>. The <code>apiClient</code> helper in <code>src/lib/api-client.js</code> handles the base URL and JSON parsing for you.</p>
+      <!-- ── API REFERENCE ──────────────────────────────────────────────────────── -->
+      <div class="page-break"></div>
+      <h2 class="section-title">
+        API Reference &nbsp;·&nbsp; api.oluwasetemi.dev
+      </h2>
+      <p>
+        All requests use the base URL <code>https://api.oluwasetemi.dev</code>.
+        The <code>apiClient</code> helper in
+        <code>src/lib/api-client.js</code> handles the base URL and JSON parsing
+        for you.
+      </p>
 
-  <table class="api-table avoid-break">
-    <thead>
-      <tr><th>Method &amp; Endpoint</th><th>Description</th><th>Response shape</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GET /posts?page=1&amp;limit=10</td>
-        <td>Paginated list of posts</td>
-        <td><code>{'{ data: Post[], meta: { page, totalPages, total } }'}</code></td>
-      </tr>
-      <tr>
-        <td>GET /posts/:id</td>
-        <td>Single post by id</td>
-        <td><code>{'{ id, title, body, userId, createdAt }'}</code></td>
-      </tr>
-      <tr>
-        <td>GET /posts/:postId/comments</td>
-        <td>Comments for a post</td>
-        <td><code>{'{ data: Comment[], meta: { total } }'}</code></td>
-      </tr>
-      <tr>
-        <td>POST /posts/:postId/comments</td>
-        <td>Create a comment. Body: <code>{'{ body: string }'}</code></td>
-        <td><code>{'{ id, body, postId, userId, createdAt }'}</code> — 201</td>
-      </tr>
-    </tbody>
-  </table>
+      <table class="api-table avoid-break">
+        <thead>
+          <tr>
+            <th>Method &amp; Endpoint</th>
+            <th>Description</th>
+            <th>Response shape</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>GET /posts?page=1&amp;limit=10</td>
+            <td>Paginated list of posts</td>
+            <td>
+              <code
+                >{'{ data: Post[], meta: { page, totalPages, total } }'}</code
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>GET /posts/:id</td>
+            <td>Single post by id</td>
+            <td><code>{'{ id, title, body, userId, createdAt }'}</code></td>
+          </tr>
+          <tr>
+            <td>GET /posts/:postId/comments</td>
+            <td>Comments for a post</td>
+            <td><code>{'{ data: Comment[], meta: { total } }'}</code></td>
+          </tr>
+          <tr>
+            <td>POST /posts/:postId/comments</td>
+            <td>Create a comment. Body: <code>{'{ body: string }'}</code></td>
+            <td>
+              <code>{'{ id, body, postId, userId, createdAt }'}</code> — 201
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-  <h2 class="section-title" style="margin-top:28px">Data Shapes</h2>
+      <h2 class="section-title" style="margin-top: 28px">Data Shapes</h2>
 
-  <pre>// Post object
+      <pre>
+// Post object
 {
   id:        string,          // e.g. "post-1"
   title:     string,
@@ -887,30 +1581,55 @@ export function usePostsContext() {
   postId:    string,
   userId:    string,
   createdAt: string,          // ISO 8601 date string
-}</pre>
+}</pre
+      >
 
-  <!-- ── PRE-FLIGHT CHECKLIST ───────────────────────────────────────────────── -->
-  <h2 class="section-title">Pre-submission Checklist</h2>
-  <ul class="checklist">
-    <li>All tests pass: <code>npm test</code> reports 0 failures.</li>
-    <li>The app runs without console errors: <code>npm run dev</code>.</li>
-    <li>The post detail page at <code>/posts/post-1</code> loads correctly with comments and a working comment form.</li>
-    <li>Navigating back from a post to <code>/posts</code> works via the back link.</li>
-    <li>Submitting a blank comment shows an error message (form validation).</li>
-    <li>The theme toggle persists after a hard reload.</li>
-    <li>Skeleton loaders appear briefly when navigating to a post for the first time.</li>
-    <li>Exported names match exactly: <code>usePost</code>, <code>useComments</code>, <code>useCreateComment</code>, <code>PostView</code>, <code>CommentCard</code>, <code>CommentsList</code>, <code>PostsContext</code>, <code>PostsProvider</code>, <code>usePostsContext</code>, <code>PostsFilters</code>, <code>CreateComment</code>, <code>PostViewSkeleton</code>, <code>CommentsListSkeleton</code>, <code>ThemeToggle</code>.</li>
-    <li>No TypeScript / ESLint errors: <code>npm run lint</code> passes.</li>
-    <li>Branch pushed as <code>exam/&lt;your-name&gt;</code>.</li>
-  </ul>
+      <!-- ── PRE-FLIGHT CHECKLIST ───────────────────────────────────────────────── -->
+      <h2 class="section-title">Pre-submission Checklist</h2>
+      <ul class="checklist">
+        <li>All tests pass: <code>npm test</code> reports 0 failures.</li>
+        <li>The app runs without console errors: <code>npm run dev</code>.</li>
+        <li>
+          The post detail page at <code>/posts/post-1</code> loads correctly
+          with comments and a working comment form.
+        </li>
+        <li>
+          Navigating back from a post to <code>/posts</code> works via the back
+          link.
+        </li>
+        <li>
+          Submitting a blank comment shows an error message (form validation).
+        </li>
+        <li>The theme toggle persists after a hard reload.</li>
+        <li>
+          Skeleton loaders appear briefly when navigating to a post for the
+          first time.
+        </li>
+        <li>
+          Exported names match exactly: <code>usePost</code>,
+          <code>useComments</code>, <code>useCreateComment</code>,
+          <code>PostView</code>, <code>CommentCard</code>,
+          <code>CommentsList</code>, <code>PostsContext</code>,
+          <code>PostsProvider</code>, <code>usePostsContext</code>,
+          <code>PostsFilters</code>, <code>CreateComment</code>,
+          <code>PostViewSkeleton</code>, <code>CommentsListSkeleton</code>,
+          <code>ThemeToggle</code>.
+        </li>
+        <li>
+          No TypeScript / ESLint errors: <code>npm run lint</code> passes.
+        </li>
+        <li>Branch pushed as <code>exam/&lt;your-name&gt;</code>.</li>
+      </ul>
 
-  <!-- ── FOOTER ──────────────────────────────────────────────────────────────── -->
-  <div class="doc-footer">
-    <span>AltSchool Africa · School of Engineering · React Second Semester Examination · 2025/2026</span>
-    <span>api.oluwasetemi.dev · react.oluwasetemi.dev</span>
-  </div>
-
-</div><!-- /page -->
-
-</body>
+      <!-- ── FOOTER ──────────────────────────────────────────────────────────────── -->
+      <div class="doc-footer">
+        <span
+          >AltSchool Africa · School of Engineering · React Second Semester
+          Examination · 2025/2026</span
+        >
+        <span>api.oluwasetemi.dev · react.oluwasetemi.dev</span>
+      </div>
+    </div>
+    <!-- /page -->
+  </body>
 </html>
