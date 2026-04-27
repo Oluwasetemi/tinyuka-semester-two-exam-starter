@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router'
 import { ErrorBoundary } from 'react-error-boundary'
-import { ErrorFallback } from '@/components/ui/error-boundary/error-fallback'
+import { createBrowserRouter, RouterProvider } from 'react-router'
 import { RootLayout } from '@/components/layouts/root-layout'
-import { PostsListSkeleton } from '@/features/posts/components/posts-list-skeleton'
+import { ErrorFallback } from '@/components/ui/error-boundary/error-fallback'
 import { Skeleton } from '@/components/ui/skeleton'
 import { paths } from '@/config/paths'
+import { PostsListSkeleton } from '@/features/posts/components/posts-list-skeleton'
 
 function PageSkeleton() {
   return (

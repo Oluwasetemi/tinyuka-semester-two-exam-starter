@@ -1,6 +1,6 @@
+import { useHead } from '@unhead/react'
 import { Link } from 'react-router'
 import { paths } from '@/config/paths'
-import { useHead } from '@unhead/react'
 
 export default function NotFoundRoute() {
   useHead({ title: '404 — Page Not Found' })

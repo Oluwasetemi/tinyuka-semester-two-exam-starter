@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router'
+import { describe, expect, it } from 'vitest'
 import { CreateComment } from '../create-comment'
 
 function Wrapper({ children }) {
@@ -14,7 +14,7 @@ function Wrapper({ children }) {
   )
 }
 
-describe('CreateComment', () => {
+describe('createComment', () => {
   it('renders a textarea and submit button', () => {
     render(<CreateComment postId="post-1" />, { wrapper: Wrapper })
     expect(screen.getByRole('textbox')).toBeInTheDocument()
@@ -47,8 +47,7 @@ describe('CreateComment', () => {
     const { http, HttpResponse } = await import('msw')
     server.use(
       http.post('https://api.oluwasetemi.dev/posts/:postId/comments', () =>
-        HttpResponse.json({ message: 'Server error' }, { status: 500 }),
-      ),
+        HttpResponse.json({ message: 'Server error' }, { status: 500 })),
     )
 
     render(<CreateComment postId="post-1" />, { wrapper: Wrapper })

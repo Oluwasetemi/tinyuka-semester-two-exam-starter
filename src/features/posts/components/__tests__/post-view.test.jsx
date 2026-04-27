@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 import { PostView } from '../post-view'
 
 const mockPost = {
@@ -10,7 +10,7 @@ const mockPost = {
   createdAt: '2024-01-15T10:00:00.000Z',
 }
 
-describe('PostView', () => {
+describe('postView', () => {
   it('renders the post title', () => {
     render(<PostView post={mockPost} />)
     expect(screen.getByRole('heading', { name: /my test post title/i })).toBeInTheDocument()

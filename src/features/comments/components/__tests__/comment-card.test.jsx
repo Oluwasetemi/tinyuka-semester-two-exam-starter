@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
 import { CommentCard } from '../comment-card'
 
 const mockComment = {
@@ -10,7 +10,7 @@ const mockComment = {
   createdAt: '2024-01-15T11:00:00.000Z',
 }
 
-describe('CommentCard', () => {
+describe('commentCard', () => {
   it('renders the comment body', () => {
     render(<CommentCard comment={mockComment} />)
     expect(screen.getByText(/this is a great comment/i)).toBeInTheDocument()

@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest'
-import { renderHook, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { renderHook, waitFor } from '@testing-library/react'
 import { createElement } from 'react'
-import { usePost, getPostQueryOptions } from '../get-post'
+import { describe, expect, it } from 'vitest'
+import { getPostQueryOptions, usePost } from '../get-post'
 
 function makeWrapper() {
   const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } })

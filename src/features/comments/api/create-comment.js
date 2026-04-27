@@ -1,6 +1,3 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { apiClient } from '@/lib/api-client'
-
 // TODO: Implement useCreateComment
 //
 // useCreateComment({ postId }) should:

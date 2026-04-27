@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom'
 import { server } from './msw/server'
+import '@testing-library/jest-dom'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 afterEach(() => server.resetHandlers())

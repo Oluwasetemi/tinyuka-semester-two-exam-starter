@@ -1,7 +1,7 @@
-import { describe, it, expect, vi } from 'vitest'
-import { renderHook, act, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { act, renderHook, waitFor } from '@testing-library/react'
 import { createElement } from 'react'
+import { describe, expect, it, vi } from 'vitest'
 import { useCreateComment } from '../create-comment'
 
 function makeWrapper() {

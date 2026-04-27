@@ -1,5 +1,5 @@
-import { useSearchParams } from 'react-router'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useSearchParams } from 'react-router'
 
 export function Pagination({ totalPages, currentPage }) {
   const [, setSearchParams] = useSearchParams()
@@ -12,7 +12,8 @@ export function Pagination({ totalPages, currentPage }) {
     })
   }
 
-  if (totalPages <= 1) return null
+  if (totalPages <= 1)
+    return null
 
   return (
     <nav
@@ -29,7 +30,13 @@ export function Pagination({ totalPages, currentPage }) {
       </button>
 
       <span className="text-sm text-white/60 px-3">
-        Page {currentPage} of {totalPages}
+        Page
+        {' '}
+        {currentPage}
+        {' '}
+        of
+        {' '}
+        {totalPages}
       </span>
 
       <button

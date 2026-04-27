@@ -2,14 +2,15 @@ import { http, HttpResponse } from 'msw'
 
 const BASE = 'https://api.oluwasetemi.dev'
 
-const makePosts = (page) =>
-  Array.from({ length: 10 }, (_, i) => ({
+function makePosts(page) {
+  return Array.from({ length: 10 }, (_, i) => ({
     id: `post-${(page - 1) * 10 + i + 1}`,
     title: `Test Post ${(page - 1) * 10 + i + 1}`,
     body: 'Test post body content for automated testing.',
     userId: 'user-1',
     createdAt: '2024-01-15T10:00:00.000Z',
   }))
+}
 
 export const handlers = [
   http.get(`${BASE}/posts`, ({ request }) => {
@@ -28,8 +29,7 @@ export const handlers = [
       body: 'Full test post body content.',
       userId: 'user-1',
       createdAt: '2024-01-15T10:00:00.000Z',
-    }),
-  ),
+    })),
 
   http.get(`${BASE}/posts/:postId/comments`, ({ params }) =>
     HttpResponse.json({
@@ -50,8 +50,7 @@ export const handlers = [
         },
       ],
       meta: { total: 2 },
-    }),
-  ),
+    })),
 
   http.post(`${BASE}/posts/:postId/comments`, async ({ request, params }) => {
     const body = await request.json()

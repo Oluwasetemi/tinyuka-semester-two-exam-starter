@@ -1,8 +1,8 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react'
-import { createMemoryRouter, RouterProvider } from 'react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { render, screen, waitFor } from '@testing-library/react'
 import { createHead, UnheadProvider } from '@unhead/react/client'
+import { createMemoryRouter, RouterProvider } from 'react-router'
+import { describe, expect, it } from 'vitest'
 import PostRoute from '../post'
 
 function renderPostRoute(id = 'post-1') {
@@ -21,7 +21,7 @@ function renderPostRoute(id = 'post-1') {
   )
 }
 
-describe('Post route /posts/:id', () => {
+describe('post route /posts/:id', () => {
   it('renders the post title', async () => {
     renderPostRoute('post-1')
     await waitFor(() =>

@@ -13,8 +13,6 @@
 //
 // Reference: src/context/posts-context.jsx
 
-import { Search } from 'lucide-react'
-
 export function PostsFilters() {
   throw new Error('TODO: implement PostsFilters context refactor in posts-filters.jsx')
 }

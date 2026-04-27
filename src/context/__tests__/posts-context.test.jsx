@@ -1,12 +1,12 @@
-import { describe, it, expect } from 'vitest'
-import { render, screen, act } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { useContext } from 'react'
+import { describe, expect, it } from 'vitest'
 import { PostsContext, PostsProvider } from '../posts-context'
 
 function Consumer() {
-  const ctx = useContext(PostsContext)
-  if (!ctx) throw new Error('PostsContext must be used within PostsProvider')
+  const ctx = use(PostsContext)
+  if (!ctx)
+    throw new Error('PostsContext must be used within PostsProvider')
   return (
     <div>
       <span data-testid="search">{ctx.search}</span>
@@ -21,21 +21,21 @@ function Consumer() {
   )
 }
 
-describe('PostsContext', () => {
+describe('postsContext', () => {
   it('provides default state { search: "", filter: "all" }', () => {
     render(<PostsProvider><Consumer /></PostsProvider>)
     expect(screen.getByTestId('search')).toHaveTextContent('')
     expect(screen.getByTestId('filter')).toHaveTextContent('all')
   })
 
-  it('SET_SEARCH action updates search value', async () => {
+  it('sET_SEARCH action updates search value', async () => {
     const user = userEvent.setup()
     render(<PostsProvider><Consumer /></PostsProvider>)
     await user.click(screen.getByRole('button', { name: /set search/i }))
     expect(screen.getByTestId('search')).toHaveTextContent('react')
   })
 
-  it('SET_FILTER action updates filter value', async () => {
+  it('sET_FILTER action updates filter value', async () => {
     const user = userEvent.setup()
     render(<PostsProvider><Consumer /></PostsProvider>)
     await user.click(screen.getByRole('button', { name: /set filter/i }))

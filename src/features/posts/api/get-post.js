@@ -1,6 +1,3 @@
-import { queryOptions, useSuspenseQuery } from '@tanstack/react-query'
-import { apiClient } from '@/lib/api-client'
-
 // TODO: Implement getPostQueryOptions and usePost
 //
 // getPostQueryOptions(id) should return queryOptions({
@@ -13,7 +10,7 @@ import { apiClient } from '@/lib/api-client'
 //
 // Reference: src/features/posts/api/get-posts.js
 
-export const getPostQueryOptions = (id) => {
+export function getPostQueryOptions(id) {
   throw new Error('TODO: implement getPostQueryOptions in get-post.js')
 }
 

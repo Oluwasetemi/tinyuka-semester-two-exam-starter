@@ -1,6 +1,6 @@
+import { Calendar } from 'lucide-react'
 import { Link } from 'react-router'
 import { paths } from '@/config/paths'
-import { Calendar } from 'lucide-react'
 
 export function PostCard({ post }) {
   return (

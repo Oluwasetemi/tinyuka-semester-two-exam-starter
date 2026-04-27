@@ -1,17 +1,22 @@
 {
   "name": "exam-starter",
-  "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp exam.html ./dist",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
     "test:ui": "vitest --ui",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "simple-git-hooks"
+  },
+  "nano-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -31,9 +36,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
+    "@eslint-react/eslint-plugin": "^2.13.0",
     "@eslint/js": "^10.0.1",
     "@rolldown/plugin-babel": "^0.2.3",
+    "@setemiojo/eslint-config": "^6.2.0",
+    "@setemiojo/utils": "^0.0.6",
     "@tailwindcss/vite": "^4.2.4",
+    "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
@@ -42,15 +51,20 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/ui": "^4.1.5",
     "babel-plugin-react-compiler": "^1.0.0",
-    "eslint": "^10.2.1",
+    "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "happy-dom": "^20.9.0",
     "msw": "^2.13.6",
+    "nano-staged": "^1.0.2",
     "shadcn": "^4.5.0",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.2.4",
     "vite": "^8.0.10",
     "vitest": "^4.1.5"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx nano-staged"
   }
 }
