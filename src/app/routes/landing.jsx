@@ -99,7 +99,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'useSuspenseQuery', url: 'https://tanstack.com/query/latest/docs/framework/react/guides/suspense' },
           { label: 'queryOptions', url: 'https://tanstack.com/query/latest/docs/framework/react/reference/queryOptions' },
-          { label: 'Class Notes: Data Fetching', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Data Fetching', url: 'https://react.oluwasetemi.dev/227' },
         ],
       },
       {
@@ -112,7 +112,7 @@ const TASK_GROUPS = [
         difficulty: 'medium',
         refs: [
           { label: 'useSuspenseQuery', url: 'https://tanstack.com/query/latest/docs/framework/react/guides/suspense' },
-          { label: 'Class Notes: Data Fetching', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Data Fetching', url: 'https://react.oluwasetemi.dev/227' },
         ],
       },
       {
@@ -126,7 +126,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'useMutation', url: 'https://tanstack.com/query/latest/docs/framework/react/reference/useMutation' },
           { label: 'invalidateQueries', url: 'https://tanstack.com/query/latest/docs/reference/QueryClient#queryclientinvalidatequeries' },
-          { label: 'Class Notes: Mutations', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Mutations', url: 'https://react.oluwasetemi.dev/252' },
         ],
       },
     ],
@@ -148,7 +148,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'Passing Props', url: 'https://react.dev/learn/passing-props-to-a-component' },
           { label: '<article> element', url: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article' },
-          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev/43' },
         ],
       },
       {
@@ -161,7 +161,7 @@ const TASK_GROUPS = [
         difficulty: 'easy',
         refs: [
           { label: 'Passing Props', url: 'https://react.dev/learn/passing-props-to-a-component' },
-          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev/43' },
         ],
       },
       {
@@ -174,7 +174,7 @@ const TASK_GROUPS = [
         difficulty: 'easy',
         refs: [
           { label: 'Rendering Lists', url: 'https://react.dev/learn/rendering-lists' },
-          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Components', url: 'https://react.oluwasetemi.dev/43' },
         ],
       },
     ],
@@ -197,7 +197,7 @@ const TASK_GROUPS = [
           { label: 'createContext', url: 'https://react.dev/reference/react/createContext' },
           { label: 'useReducer', url: 'https://react.dev/reference/react/useReducer' },
           { label: 'Context + Reducer', url: 'https://react.dev/learn/scaling-up-with-reducer-and-context' },
-          { label: 'Class Notes: Context', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Context', url: 'https://react.oluwasetemi.dev/217?clicks=4' },
         ],
       },
       {
@@ -211,7 +211,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'useContext', url: 'https://react.dev/reference/react/useContext' },
           { label: 'Passing Data Deeply', url: 'https://react.dev/learn/passing-data-deeply-with-context' },
-          { label: 'Class Notes: Context', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Context', url: 'https://react.oluwasetemi.dev/217?clicks=4' },
         ],
       },
     ],
@@ -233,7 +233,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'useActionState', url: 'https://react.dev/reference/react/useActionState' },
           { label: 'useFormStatus', url: 'https://react.dev/reference/react-dom/useFormStatus' },
-          { label: 'Class Notes: Forms', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Forms', url: 'https://react.oluwasetemi.dev/131' },
         ],
       },
     ],
@@ -273,7 +273,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'Suspense', url: 'https://react.dev/reference/react/Suspense' },
           { label: 'animate-pulse', url: 'https://tailwindcss.com/docs/animation' },
-          { label: 'Class Notes: Suspense', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Suspense', url: 'https://react.oluwasetemi.dev/237' },
         ],
       },
       {
@@ -287,7 +287,7 @@ const TASK_GROUPS = [
         refs: [
           { label: 'Suspense', url: 'https://react.dev/reference/react/Suspense' },
           { label: 'animate-pulse', url: 'https://tailwindcss.com/docs/animation' },
-          { label: 'Class Notes: Suspense', url: 'https://react.oluwasetemi.dev' },
+          { label: 'Class Notes: Suspense', url: 'https://react.oluwasetemi.dev/237' },
         ],
       },
     ],

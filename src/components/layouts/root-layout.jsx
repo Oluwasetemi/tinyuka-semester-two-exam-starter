@@ -1,15 +1,15 @@
-import { Outlet, Link, NavLink } from 'react-router'
-import { paths } from '@/config/paths'
+import { Outlet, Link, NavLink } from "react-router";
+import { paths } from "@/config/paths";
 
 export function RootLayout() {
   return (
-    <div className="min-h-screen" style={{ fontFamily: 'var(--font-body)' }}>
+    <div className="min-h-screen" style={{ fontFamily: "var(--font-body)" }}>
       <header className="border-b border-white/10 px-6 py-4">
         <nav className="max-w-5xl mx-auto flex items-center justify-between">
           <Link
             to={paths.home.getHref()}
             className="font-semibold text-sm tracking-wide hover:text-white/70 transition-colors"
-            style={{ fontFamily: 'var(--font-mono)' }}
+            style={{ fontFamily: "var(--font-mono)" }}
           >
             exam-starter
           </Link>
@@ -17,7 +17,7 @@ export function RootLayout() {
             <NavLink
               to={paths.posts.getHref()}
               className={({ isActive }) =>
-                isActive ? 'text-white' : 'hover:text-white transition-colors'
+                isActive ? "text-white" : "hover:text-white transition-colors"
               }
             >
               Posts
@@ -25,10 +25,18 @@ export function RootLayout() {
             <NavLink
               to={paths.errorTest.getHref()}
               className={({ isActive }) =>
-                isActive ? 'text-white' : 'hover:text-white transition-colors'
+                isActive ? "text-white" : "hover:text-white transition-colors"
               }
             >
               Error Test
+            </NavLink>
+            <NavLink
+              to={`/exam.html`}
+              className={({ isActive }) =>
+                isActive ? "text-white" : "hover:text-white transition-colors"
+              }
+            >
+              Exam Doc
             </NavLink>
           </div>
         </nav>
@@ -38,5 +46,5 @@ export function RootLayout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
