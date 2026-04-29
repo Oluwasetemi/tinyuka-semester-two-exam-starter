@@ -22,6 +22,7 @@ import { createContext } from 'react'
 //
 // Reference: src/pages in teaching notes — state-management.md
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const PostsContext = createContext(null)
 
 export function PostsProvider({ children }) {

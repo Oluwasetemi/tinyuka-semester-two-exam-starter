@@ -317,7 +317,7 @@ function FilePath({ file }) {
   async function handleCopy() {
     await navigator.clipboard.writeText(file)
     setCopied(true)
-    setTimeout(() => setCopied(false), 1500)
+    setTimeout(setCopied, 1500, false)
   }
 
   return (

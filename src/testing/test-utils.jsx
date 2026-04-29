@@ -11,10 +11,9 @@ function makeQueryClient() {
   })
 }
 
-export function renderWithProviders(ui, { route = '/', ...options } = {}) {
-  const queryClient = makeQueryClient()
-
-  function Wrapper({ children }) {
+function makeWrapper(queryClient, route) {
+  // eslint-disable-next-line react/component-hook-factories
+  return function Wrapper({ children }) {
     return (
       <QueryClientProvider client={queryClient}>
         <MemoryRouter initialEntries={[route]}>
@@ -23,11 +22,15 @@ export function renderWithProviders(ui, { route = '/', ...options } = {}) {
       </QueryClientProvider>
     )
   }
+}
 
+export function renderWithProviders(ui, { route = '/', ...options } = {}) {
+  const queryClient = makeQueryClient()
   return {
     queryClient,
-    ...render(ui, { wrapper: Wrapper, ...options }),
+    ...render(ui, { wrapper: makeWrapper(queryClient, route), ...options }),
   }
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export * from '@testing-library/react'
